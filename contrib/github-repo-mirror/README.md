@@ -1,17 +1,20 @@
 # Mirroring the Class GitHub Repository
 
-This semester many class assignments are hosted on GitHub.  The repository name
-should be given to you elsewhere and will be referred to in this document as
-"REPO\_NAME".
+This semester many class assignments are hosted in a GitHub repository.
+Individual assignments are in subfolders.  Within the folder for every
+assignment is a `README.md` file, containing the description for the
+assignment.  The folder also contains other files that are part of the
+assignment.  The description of the assignment is often best viewed with a Web
+browser.  The accompanying files can be downloaded directly from the folder,
+with a Web browser. However, creating a _mirror_ of the repository helps you to
+more easily download files associated with assignments, keep them up-to-date,
+and simultaneously version your own code by committing it to your own private
+GitHub repository.
 
-Individual assignments are in subfolders.  Within the folder for every assignment
-is a `README.md` file, containing the description for the assignment.  The
-folder also contains other files that are part of the assignment.  The
-description of the assignment is often best viewed with a Web browser.  The
-accompanying files can be downloaded directly from the folder, with a Web
-browser. However, in order to more easily download files associated with
-assignments, keep them up-to-date, and simultaneously version your own code
-developed for class, we suggest mirroring the class GitHub repository.
+The names of the class "upstream" repository and your own "private" repository
+will be given to you elsewhere and will be referred to in this document as
+"CLASS\_REPO\_NAME" and "PRIVATE\_REPO\_NAME", respectively.  Additionally,
+"USERNAME" refers to your GitHub username.
 
 
 ## Registering an SSH Key for Use with GitHub
@@ -24,7 +27,7 @@ this again.
 
  1. Find out if you already have an SSH key to use by running the following:
 
-    ```
+    ```bash
     $ ls -ltra ~/.ssh/id_*
     -rw-r--r-- 1 user group  564 Jan  7 15:35 /home/user/.ssh/id_rsa.pub
     -rw------- 1 user group 2635 Jan  7 15:35 /home/user/.ssh/id_rsa
@@ -34,7 +37,7 @@ this again.
     and `id_rsa`, respectively.  However, if there are no keys, `ls` will
     return an error:
 
-    ```
+    ```bash
     $ ls -ltra ~/.ssh/id_*
     ls: cannot access '/home/user/.ssh/id_*': No such file or directory
     ```
@@ -44,12 +47,13 @@ this again.
  2. Run the following from the command line to create an SSH public/private key
     pair:
 
-    ```
+    ```bash
     $ ssh-keygen
     Generating public/private rsa key pair.
     ```
 
     At the following prompt, just hit enter to use the default file location:
+
     ```
     Enter file in which to save the key (/home/user/.ssh/id_rsa):
     ```
@@ -65,9 +69,10 @@ this again.
 
  3. Print the contents of your _public_ key, and copy them to your clipboard:
 
-    ```
+    ```bash
     $ cat ~/.ssh/id_rsa.pub
     ```
+
     (this assumes the name of your public key file is `id_rsa.pub`.)
 
  4. Follow steps 2 through 8 in the
@@ -77,58 +82,71 @@ this again.
 
 ## Create a Mirrored Version of the GitHub Class Repository
 
-This is a one-time process to create and configure your own private repository
-for referencing and committing changes, which repository is a mirror of the
-upstream class repository.
+This is a one-time process to create and configure your own private GitHub
+repository for referencing and committing changes.  Your private repository
+will also be a mirror of the upstream class repository.
 
-Throughout these steps, we will refer to the official class repository as the
-"upstream" repository and your own repository as the "new" repository.
-
- 1. Create new repository on github. Follow steps 1 through 6 in the
+ 1. Create the private repository as a new repository on GitHub. Follow steps 1
+    through 6 in the
     [official documentation](https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository),
     adhering to the following:
-    - Create the repository under your user ("username"), and name the
-      repository `byu-cs324` (Step 2).
+
+    - Create the repository under your GitHub user ("USERNAME"), and name the
+      repository according to PRIVATE\_REPO\_NAME (Step 2).
     - Make sure the visibility of the repository is _Private_ (Step 4).
     - Do _not_ check the box "Initialize this repository with a README" (Step 5).
 
- 2. Please check that your repository is _private_.
+ 2. Please double-check that your repository is _private_.
 
  3. Clone the upstream repository by running the following from the
     terminal:
-    ```
-    git clone --bare https://github.com/REPO_NAME upstream-repo
-    ```
-    (Remember that "REPO\_NAME" is just a placeholder and should be replaced
-    with the actual repository name.)
 
- 4. Push a mirror of the upstream repository to the new repository, which you
-    have just created:
+    ```bash
+    $ git clone --bare https://github.com/CLASS_REPO_NAME upstream-repo
     ```
-    cd upstream-repo
-    git push --mirror ssh://git@github.com/username/byu-cs324
+
+    (Substitute "CLASS\_REPO\_NAME" with the name of the upstream class
+    repository.)
+
+ 4. Push a mirror of the upstream repository to the new, private repository,
+    which you have just created:
+
+    ```bash
+    $ cd upstream-repo
+    $ git push --mirror ssh://git@github.com/USERNAME/PRIVATE_REPO_NAME
     ```
-    (Substitute "username" with your GitHub username.)
+
+    (Substitute "USERNAME" with your GitHub username and "PRIVATE\_REPO\_NAME"
+    with the name of your private repository.)
 
  5. Remove your clone of the upstream repository.
-    ```
-    cd ../
-    rm -rf upstream-repo
+
+    ```bash
+    $ cd ../
+    $ rm -rf upstream-repo
     ```
 
- 6. Clone your new repository, which is now a mirror of the upstream repository:
+ 6. Clone your new, private repository, which is now a mirror of the upstream
+    repository:
+
+    ```bash
+    $ git clone ssh://git@github.com/USERNAME/PRIVATE_REPO_NAME
     ```
-    git clone ssh://git@github.com/username/byu-cs324
-    ```
-    (Substitute "username" with your GitHub username.)
+
+    (Substitute "USERNAME" with your GitHub username and "PRIVATE\_REPO\_NAME"
+    with the name of your private repository.)
+
 
  7. Add the upstream repository to your clone:
+
+    ```bash
+    $ cd PRIVATE_REPO_NAME
+    $ git remote add upstream ssh://git@github.com/CLASS_REPO_NAME
+    $ git remote -v
     ```
-    cd byu-cs324
-    git remote add upstream ssh://git@github.com/REPO_NAME
-    git remote -v
-    ```
-    (Substitute "REPO\_NAME" with the actual repository name.)
+
+    (Substitute "PRIVATE\_REPO\_NAME" with the name of your private repository
+    and "CLASS\_REPO\_NAME" with the name of the upstream class repository.)
 
 
 ## Update Your Mirrored Repository from the Upstream
@@ -137,25 +155,34 @@ Do this every time you would like to pull down the changes from the upstream
 repository and integrate them into your own repository:
 
  1. Pull down the latest changes from both your repository and the upstream:
+
+    ```bash
+    $ git fetch --all
     ```
-    git fetch --all
-    ```
+
  2. Stash (save aside) any uncommitted changes that you might have locally in
     your clone:
+
+    ```bash
+    $ git stash
     ```
-    git stash
-    ```
+
  3. Merge in the changes from the upstream repository:
+
+    ```bash
+    $ git merge upstream/master
     ```
-    git merge upstream/master
-    ```
+
  4. Merge back in any uncommitted changes that were stashed:
+
+    ```bash
+    $ git stash pop
     ```
-    git stash pop
-    ```
+
  5. Push out the locally merged changes to your repository:
-    ```
-    git push
+
+    ```bash
+    $ git push
     ```
 
 
@@ -165,11 +192,14 @@ Do this every time you want to commit changes to the clone of your repository
 and push them out to the repository:
 
  1. Commit any local changes that you've made (i.e., in your own development):
+
+    ```bash
+    $ git commit ...
     ```
-    git commit ...
-    ```
+
     (replace "..." with the names of any files or directories that have changes)
  2. Push out your local commits to your repository:
-    ```
-    git push
+
+    ```bash
+    $ git push
     ```
