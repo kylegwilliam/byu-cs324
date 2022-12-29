@@ -446,7 +446,7 @@ at follow, the most important things are:
 
  29. Use `getenv()` to assign the pointer `s1` to the string corresponding to
      the environment variable `CS324_VAR`.  If such a value exists, then print:
-     `"The value is: _____\n"` (replace `"_____"` with the actual value);
+     `"The value is: _____\n"` (replace `_____` with the actual value);
      otherwise, print `"CS324_VAR not found\n"`.
 
      *What command line should you use to get your code to find the `CS324_VAR`
