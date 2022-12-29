@@ -1,11 +1,8 @@
 # Mirroring the Class GitHub Repository
 
-This semester many class assignments are hosted on GitHub in the following
-repository:
-
-```
-https://github.com/kentseamons/byu-cs324-f2022
-```
+This semester many class assignments are hosted on GitHub.  The repository name
+should be given to you elsewhere and will be referred to in this document as
+"REPO\_NAME".
 
 Individual assignments are in subfolders.  Within the folder for every assignment
 is a `README.md` file, containing the description for the assignment.  The
@@ -95,38 +92,44 @@ Throughout these steps, we will refer to the official class repository as the
     - Make sure the visibility of the repository is _Private_ (Step 4).
     - Do _not_ check the box "Initialize this repository with a README" (Step 5).
 
- 2. Clone the upstream repository by running the following from the
+ 2. Please check that your repository is _private_.
+
+ 3. Clone the upstream repository by running the following from the
     terminal:
     ```
-    git clone --bare https://github.com/kentseamons/byu-cs324-f2022 upstream-repo
+    git clone --bare https://github.com/REPO_NAME upstream-repo
     ```
+    (Remember that "REPO\_NAME" is just a placeholder and should be replaced
+    with the actual repository name.)
 
- 3. Push a mirror of the upstream repository to the new repository, which you
+ 4. Push a mirror of the upstream repository to the new repository, which you
     have just created:
     ```
     cd upstream-repo
     git push --mirror ssh://git@github.com/username/byu-cs324
     ```
-    (substitute "username" with your GitHub username)
+    (Substitute "username" with your GitHub username.)
 
- 4. Remove your clone of the upstream repository.
+ 5. Remove your clone of the upstream repository.
     ```
     cd ../
     rm -rf upstream-repo
     ```
 
- 5. Clone your new repository, which is now a mirror of the upstream repository:
+ 6. Clone your new repository, which is now a mirror of the upstream repository:
     ```
     git clone ssh://git@github.com/username/byu-cs324
     ```
-    (substitute "username" with your GitHub username)
+    (Substitute "username" with your GitHub username.)
 
- 6. Add the upstream repository to your clone:
+ 7. Add the upstream repository to your clone:
     ```
     cd byu-cs324
-    git remote add upstream ssh://git@github.com/kentseamons/byu-cs324-f2022
+    git remote add upstream ssh://git@github.com/REPO_NAME
     git remote -v
     ```
+    (Substitute "REPO\_NAME" with the actual repository name.)
+
 
 ## Update Your Mirrored Repository from the Upstream
 
@@ -154,6 +157,7 @@ repository and integrate them into your own repository:
     ```
     git push
     ```
+
 
 ## Commit and push local changes to private repo:
 
