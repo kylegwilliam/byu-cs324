@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define STRING1 "hello"
 #define BUFSIZE 30
 
 void memprint(char *, char *, int);
@@ -60,9 +59,7 @@ void part0() {
 
 int part1() {
 	// Do not change any of the variable declarations here.
-	char a;
-	char s1[] = STRING1;
-	char b;
+	char s1[] = "hello";
 	char s2[10];
 
 	int s1_len = 0;
@@ -80,7 +77,7 @@ int part1() {
 }
 
 void part2(int len) {
-	char s1[] = STRING1;
+	char s1[] = "hello";
 	char s2[1024];
 	char *s3 = s1;
 
