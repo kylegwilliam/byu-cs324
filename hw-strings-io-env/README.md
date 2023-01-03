@@ -161,6 +161,7 @@ fputs("hello 42\n");
 ```c
 write(STDOUT_FILENO, "hello 42\n", 8);
 ```
+
 (Note, however, that `write()` does not have buffering.)
 
 
@@ -177,11 +178,17 @@ at follow, the most important things are:
 # Part 1
 
  1. Find the number of bytes/characters allocated on the stack for `s1`
-    _without_ using `strlen()`.  You can do this by counting the number of
-    bytes between the memory location of `s1` and that of the next
-    consecutively allocated variable in the frame, in this case, `a` (Note that
-    the variable `a` will have the _higher_ address space).  Save that value as
-    `s1_len`, and then print `s1_len` on a line by itself, using `printf()`.
+    _without_ using using the `sizeof()` operator (not `strlen()`!).  Note that
+    `sizeof()` is a _compile-time_ operator; that means that the size (i.e.,
+    the number of bytes allocated) is determined at compile time, before the
+    code ever runs.  In this case, `sizeof()` accurately reflects the number of
+    bytes allocated for (i.e., the "size" of) `s1` because `s1` is explicitly
+    assigned a value using a string literal.  The same would not be true for
+    something dynamically allocated (i.e., at _run time_) with `malloc()`; it
+    simply couldn't be known ahead of time.
+
+    Save the value as `s1_len`, and then print `s1_len` on a line by itself,
+    using `printf()`.
 
     *How does the number of bytes allocated for `s1` compare to the number of
     visible characters in `s1`?*
@@ -189,8 +196,6 @@ at follow, the most important things are:
  2. Find the number of bytes/characters allocated on the stack for `s2` using
     the same methodology as you used for question 1.  Save that value as
     `s2_len`, and then print `s2_len` on a line by itself, using `printf()`.
-    (Please note that this result will not always be the case, as the compiler
-    sometimes pads the allocations for variables for optimality.)
 
     *How does the number of bytes allocated for `s2` compare to the declared
     number of bytes for `s2`?*
@@ -203,7 +208,7 @@ at follow, the most important things are:
     `s1`, both as the 8-bit decimal and hexadecimal integer values for each
     byte and as their ASCII equivalent.
 
-    a. *What is the value of the extra byte allocated for `s1`?*  (That byte
+    a. *What is the value of the "extra" byte allocated for `s1`?*  (That byte
        value is the very definition of what makes `s1` a "string" in C.)
     b. *What is the ASCII character associated with the hexadecimal value
        0x23?* (Hint: See the man page for `ascii`.)
@@ -217,16 +222,42 @@ at follow, the most important things are:
     variables `s1`, `s2`, and `s3`, as an unsigned integer in decimal format
     (i.e., format `"%u"`), each on a line by itself.
 
+    Note that this exercise has nothing to do with the actual _value_ of the
+    variables, which will be compared in a subsequent question.  Rather, this
+    only has to do with the memory addresses of the variables themselves.
+
     *Do any of the variables have the same address on the stack?  If so,
     which and why?*
 
- 5. Print out the address of (i.e., using the `&` operator) the _first
-    byte/character_ in the array/string corresponding to the variables
-    `s1`, `s2`, and `s3`, as an unsigned integer in decimal format (i.e.,
-    format `"%u"`), each on a line by itself.
+ 5. Print out the address _referred to_ (i.e., its pointer value) by each of
+    the variables `s1`, `s2`, and `s3` as an unsigned integer in decimal format
+    (i.e., format `"%u"`), each on a line by itself.  Since all these variables
+    refer to arrays/strings, you can also think of each referred-to addresses
+    as that of the _first byte/character_ in each array/string referred to.
 
-    *Do any of the variables reference the same content (i.e., content
-    has the same values)?  If so, which and why?*
+    Note that while `s1`, `s2`, and `s3` are _declared_ differently, they
+    effectively act the same, in that:
+
+    - When represented as an _integer_ value (i.e., format `"%u"`), `printf()`
+      uses the referred-to address (i.e., the _pointer value_) as a
+      replacement.
+    - When represented as a _string_ value (i.e., format `"%s"`), `printf()`
+      uses the values _at_ the referred-to address (i.e., the string contents)
+      as a replacement.
+
+    However, one difference between `char[]` and `char *` is that for `char[]`,
+    the address of the variable is _also_ the address _referred to_ by the
+    variable.  That means that there is no changing the _referred-to address_
+    (or _pointer value__) of a variable declared `char[]`.
+
+    a. *For any of the variables, is the referred-to address (i.e., the pointer
+       value) the same as the _address_ of the variable itself (i.e., the
+       answer to question 4)?  If so, which and why?*  Hint: See explanatory
+       text in this question.
+
+    b. *Do any of the variables reference the same content?  That is, are any
+       of the addresses / pointer values the same between `s1`, `s2`, and/or
+       `s3`)?  If so, which and why?*
 
  6. Use `printf()` to print out the contents of each of the array/string
     variables `s1`, `s2`, and `s3`, i.e., using the `"%s"` format, each on a
