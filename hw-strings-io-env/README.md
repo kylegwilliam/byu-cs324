@@ -411,6 +411,7 @@ at follow, the most important things are:
      a. *Did the return value from `read()` match the count value passed in?
 	Why or why not?* (Hint: See the RETURN VALUE section in the man page
         for `read(2)`.)
+
      b. *Was a null character included?  Why or not?* (Hint: To answer the
 	"why" question, use the `hexdump` command-line utility to inspect the
         contents of `test.txt`.)
@@ -427,10 +428,12 @@ at follow, the most important things are:
      a. *Did this new call to `read()` start reading from beginning of the file
         or continue where it left off after the last call?  Why?*
         (Hint: See the RETURN VALUE section in the man page for `read(2)`.)
+
      b. You have now used two variables, in two different calls, to read
         from the file.  *Based on your answer to a, does the _address_ of
         the variable referencing a file descriptor matter, or only its
         _value_?*
+
      c. *How many total bytes have been read?*
 
  25. Repeat the instructions for question 24, but this time read up to 50
@@ -439,7 +442,9 @@ at follow, the most important things are:
      a. *Did the return value from read() match the count value passed in?  Why
         or why not?*
         (Hint: See the RETURN VALUE section in the man page for `read(2)`.)
+
      b. *How many total bytes have been read?*
+
      c. *How many total bytes are in the file?*
         (Hint: Use the `stat` command-line utility to see the size of the file,
         in bytes.)
@@ -457,6 +462,7 @@ at follow, the most important things are:
      the file stream using `fclose()`.
 
      a. *What is the file descriptor value for the new file stream?*
+
      b. *What is the significance of the file descriptor value of the new file
         stream?*
         (Hint: See the first two paragraphs of the DESCRIPTION in the man page
@@ -470,6 +476,7 @@ at follow, the most important things are:
         this mean?*
         (Hint: See the RETURN VALUE section in the man page for `close(2)`.  See
         also question 24b.)
+
      b. What is the return value of the second instance of `close()`?  What does
         this mean, and what is the likely cause?
         (Hint: See the RETURN VALUE section in the man page for `close(2)`.)
