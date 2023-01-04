@@ -259,7 +259,7 @@ at follow, the most important things are:
 
     b. *Do any of the variables reference the same content?  That is, are any
        of the addresses / pointer values the same between `s1`, `s2`, and/or
-       `s3`)?  If so, which and why?*
+       `s3`?  If so, which and why?*
 
  6. Use `printf()` to print out the contents of each of the array/string
     variables `s1`, `s2`, and `s3`, i.e., using the `"%s"` format, each on a
