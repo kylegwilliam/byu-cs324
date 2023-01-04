@@ -210,8 +210,10 @@ at follow, the most important things are:
 
     a. *What is the value of the "extra" byte allocated for `s1`?*  (That byte
        value is the very definition of what makes `s1` a "string" in C.)
+
     b. *What is the ASCII character associated with the hexadecimal value
        0x23?* (Hint: See the man page for `ascii`.)
+
     c. *What is the hexadecimal value of the ASCII character `z` (lower
        case)?* (Hint: See the man page for `ascii`.)
 
