@@ -7,36 +7,42 @@ sections of an existing C program and answer questions about its output.
 
 # Preparation
 
- 1. Read the following in preparation for this assignment:
-    - 10.1 - 10.4 in the book
-    - The man pages for the following:
-      - `open`
-      - `close`
-      - `read`
-      - `stdin`
-      - `printf`
-      - `sprintf`
-      - `fprintf`
-      - `strcpy`
-      - `memcpy`
-      - `strcmp`
-      - `memcmp`
-      - `ascii`
-      - `charsets`
+Read the following in preparation for this assignment:
 
- 2. You will be doing a writeup on this assignment. Call your writeup
-    `strings-io-env.txt`. Make sure you answer any questions/provide outputs as
-    stated in the *bolded* questions/statements (there should be 29 in all).
+ - 10.1 - 10.4 and 10.9 in the book
+
+Additionally, man pages for the following are also referenced throughout the
+assignment:
+
+ - `write()`
+ - `charsets`
+ - `ascii`
+ - `printf(3)`
+ - `fprintf()`
+ - `fputs()`
+ - `strcmp()`
+ - `memcmp()`
+ - `memset()`
+ - `strpcy()`
+ - `sprintf()`
+ - `stdin`
+ - `stdout`
+ - `stderr`
+ - `fileno()`
+ - `open()`
+ - `fopen()`
+ - `read()`
+ - `close()`
+ - `getenv()`
 
 
 # Instructions
 
-For each of the section that follow, follow the instructions and answer the
-questions that follow.  For you most questions, you will want to re-compile and
-re-run the program _after each question_:
+For each of the sections that follow, follow the instructions, and answer the
+questions.  For most questions, you will want to re-compile and re-run the
+program _after each question_:
 
-
-```
+```bash
 $ gcc -o learn_c learn_c.c
 $ ./learn_c test.txt
 ```
@@ -200,7 +206,11 @@ at follow, the most important things are:
     *How does the number of bytes allocated for `s2` compare to the declared
     number of bytes for `s2`?*
 
- 3. Call `memprint()` on `s1` three times using `s1_len`, first showing
+ 3. `memprint()` is a function included right in `learn_c.c`.  It simply prints
+    the contents of an array of type `char []`, byte-by-byte, to standard
+    output using the designated format.
+
+    Call `memprint()` on `s1` three times using `s1_len`, first showing
     each byte/character value as hexadecimal (i.e., format `"%02x"`), then
     showing each byte/character value as decimal (i.e., format `"%d"`), then
     showing each byte/character value as its ASCII representation (i.e., format
@@ -329,8 +339,10 @@ at follow, the most important things are:
 
  15. Use `memset()` to initialize every byte value in `s3` to `'z'` (or,
      equivalently, `0x7a`).  Then call `memprint()` on `s3` to show the
-     hexadecimal value of each byte/character (i.e., format `"%02x"`).  Repeat
-     both the `memset()` function and the `memprint()` function for `s4`.
+     hexadecimal value of each byte/character (i.e., format `"%02x"`).
+
+     Repeat both the `memset()` function and the `memprint()` function for
+     `s4`.
 
      *Does the output show any characters other than (ASCII) `z`?* (Hint: It
      shouldn't.)
@@ -492,8 +504,3 @@ at follow, the most important things are:
      *What command line should you use to get your code to find the `CS324_VAR`
      value?*  (Hint: `FOO=var ./cmd` sets the environment variable `FOO` to
      `var` for the single running instance of `cmd`.
-
-
-# Submission
-
-Upload `strings-io-env.txt` to the assignment page on LearningSuite.
