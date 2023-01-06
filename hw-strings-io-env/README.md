@@ -391,9 +391,11 @@ at follow, the most important things are:
 
  20. Print out the contents of `buf` to standard output in two ways:
 
-     1. call `printf()`;
+     1. call `printf()` using the `"%s"` format string;
      2. call `write()`, specifying the integer file descriptor value for
         standard output; in this case, use `BUFSIZE` as the byte count.
+        (Hint: see the
+        [introduction section](#introduction---characters-encoding-and-presentation)).
 
      After each, print a newline character, so each printout is on its own line.
 
