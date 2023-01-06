@@ -231,8 +231,16 @@ at follow, the most important things are:
 # Part 2
 
  4. Print out the address of (i.e., using the `&` operator) of each of the
-    variables `s1`, `s2`, and `s3`, as an unsigned integer in decimal format
-    (i.e., format `"%u"`), each on a line by itself.
+    variables `s1`, `s2`, and `s3`, as an long unsigned integer in decimal
+    format (i.e., format `"%lu"`), each on a line by itself.
+
+    The C compiler will complain that you are passing `char *` where an
+    `long unsigned int` was expected.  Usually, that means that you are doing
+    something wrong!  For this exercise, you can tell the compiler to simply
+    treat the value like an `unsigned int` by explicitly type-casting it
+    as such.  To do so, preface it with `(unsigned int)`.  Please note that
+    this does not change anything with regard to the value of the pointer; it
+    merely tells the compiler that you are using it differently.
 
     Note that this exercise has nothing to do with the actual _value_ of the
     variables, which will be compared in a subsequent question.  Rather, this
@@ -246,6 +254,8 @@ at follow, the most important things are:
     (i.e., format `"%u"`), each on a line by itself.  Since all these variables
     refer to arrays/strings, you can also think of each referred-to addresses
     as that of the _first byte/character_ in each array/string referred to.
+
+    See the comment on type casting from question 4.
 
     Note that while `s1`, `s2`, and `s3` are _declared_ differently, they
     effectively act the same, in that:
