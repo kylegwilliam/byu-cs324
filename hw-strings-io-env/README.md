@@ -513,6 +513,9 @@ at follow, the most important things are:
      `"The value is: _____\n"` (replace `_____` with the actual value);
      otherwise, print `"CS324_VAR not found\n"`.
 
-     *What command line should you use to get your code to find the `CS324_VAR`
-     value?*  (Hint: `FOO=var ./cmd` sets the environment variable `FOO` to
-     `var` for the single running instance of `cmd`.
+     Run your code with and without the `CS324_VAR` environment variable set
+     and with different values.
+
+     *What command line did you use to get your code to find a `CS324_VAR`
+     value of "awesome" (without quotes)?* (Hint: `FOO=var ./cmd` sets the
+     environment variable `FOO` to `var` for the single running instance of `cmd`.
