@@ -383,7 +383,7 @@ at follow, the most important things are:
 
  19. Use `memset()` to initialize every byte value in `buf` to `'z'` (or,
      equivalently, `0x7a`).  Then assign the byte at index 24 to `'\0'` (or,
-     equivalently, 0).  Finally, call `memprint()` on `s3` to show the
+     equivalently, 0).  Finally, call `memprint()` on `buf` to show the
      hexadecimal value of each byte/character (i.e., format `"%02x"`).
 
      *Does the output show any characters other than (ASCII) `z` and null?
