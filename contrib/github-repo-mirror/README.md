@@ -1,23 +1,23 @@
 # Mirroring the Class GitHub Repository
 
-This semester many class assignments are hosted in a GitHub repository.
-Individual assignments are in subfolders.  Within the folder for every
-assignment is a `README.md` file, containing the description for the
+Many of the assignments for this class are hosted in a GitHub repository.
+Individual assignments are in subfolders of that repository.  Within the folder
+for every assignment is a `README.md` file, containing the description for the
 assignment.  The folder also contains other files that are part of the
-assignment.  The description of the assignment is often best viewed with a Web
-browser.  The accompanying files can be downloaded directly from the folder,
-with a Web browser. However, creating a _mirror_ of the repository helps you to
-more easily download files associated with assignments, keep them up-to-date,
-and simultaneously version your own code by committing it to your own private
-GitHub repository.
+assignment.  The description of the assignment is often best viewed on the
+GitHub site itself with a Web browser.  The accompanying files can be
+downloaded directly from the folder, with a Web browser. However, creating a
+_mirror_ of the repository helps you to more easily download files associated
+with assignments, keep them up-to-date, and simultaneously version your own
+code by committing it to your own private GitHub repository.
 
-The names of the class "upstream" repository and your own "private" repository
-will be given to you elsewhere and will be referred to in this document as
-"CLASS\_REPO\_NAME" and "PRIVATE\_REPO\_NAME", respectively.  Additionally,
-"USERNAME" refers to your GitHub username.
+The path of the class "upstream" repository and the name of own "private"
+repository will be given to you elsewhere and will be referred to in this
+document as "CLASS\_REPO\_PATH" and "PRIVATE\_REPO\_NAME", respectively.
+Additionally, "USERNAME" refers to your GitHub username.
 
 
-## Registering an SSH Key for Use with GitHub
+## Register an SSH Key for Use with GitHub
 
 These steps are necessary for you to use SSH to fetch and push your updates
 from and to GitHub.  They should be performed on the machine on which you will
@@ -80,7 +80,7 @@ this again.
     to register your SSH key with your GitHub account.
 
 
-## Create a Mirrored Version of the GitHub Class Repository
+## Create a Mirrored Version of the Class Repository
 
 This is a one-time process to create and configure your own private GitHub
 repository for referencing and committing changes.  Your private repository
@@ -102,10 +102,10 @@ will also be a mirror of the upstream class repository.
     terminal:
 
     ```bash
-    $ git clone --bare https://github.com/CLASS_REPO_NAME upstream-repo
+    $ git clone --bare https://github.com/CLASS_REPO_PATH upstream-repo
     ```
 
-    (Substitute "CLASS\_REPO\_NAME" with the name of the upstream class
+    (Substitute "CLASS\_REPO\_PATH" with the path of the upstream class
     repository.)
 
  4. Push a mirror of the upstream repository to the new, private repository,
@@ -126,8 +126,17 @@ will also be a mirror of the upstream class repository.
     $ rm -rf upstream-repo
     ```
 
- 6. Clone your new, private repository, which is now a mirror of the upstream
-    repository:
+
+## Create a Clone of Your Private Repository
+
+This is a one-time process to clone the private repository you have created.
+These commands once for every clone that you would like to make of your
+repository.  For example, you might like to clone the repository on a CS lab
+machine and also on a personal machine.  Just remember that you will need to
+keep all clones up-to-date!
+
+ 1. Clone your new, private repository, which is now a mirror of the upstream
+    class repository:
 
     ```bash
     $ git clone ssh://git@github.com/USERNAME/PRIVATE_REPO_NAME
@@ -137,22 +146,25 @@ will also be a mirror of the upstream class repository.
     with the name of your private repository.)
 
 
- 7. Add the upstream repository to your clone:
+ 2. Add the upstream repository to your clone:
 
     ```bash
     $ cd PRIVATE_REPO_NAME
-    $ git remote add upstream ssh://git@github.com/CLASS_REPO_NAME
+    $ git remote add upstream ssh://git@github.com/CLASS_REPO_PATH
     $ git remote -v
     ```
 
     (Substitute "PRIVATE\_REPO\_NAME" with the name of your private repository
-    and "CLASS\_REPO\_NAME" with the name of the upstream class repository.)
+    and "CLASS\_REPO\_PATH" with the path of the upstream class repository.)
 
 
 ## Update Your Mirrored Repository from the Upstream
 
 Do this every time you would like to pull down the changes from the upstream
-repository and integrate them into your own repository:
+repository and integrate them into your own repository.  Remember that you will
+need to do this for any and all clones that you have made of your repository.
+[that you have made of your repository](#create-a-clone-of-your-private-repository).
+
 
  1. Pull down the latest changes from both your repository and the upstream:
 
