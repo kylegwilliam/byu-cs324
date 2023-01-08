@@ -184,7 +184,7 @@ at follow, the most important things are:
 # Part 1
 
  1. Find the number of bytes/characters allocated on the stack for `s1`
-    _without_ using using the `sizeof()` operator (not `strlen()`!).  Note that
+    using the `sizeof()` operator (not `strlen()`!).  Note that
     `sizeof()` is a _compile-time_ operator; that means that the size (i.e.,
     the number of bytes allocated) is determined at compile time, before the
     code ever runs.  In this case, `sizeof()` accurately reflects the number of
