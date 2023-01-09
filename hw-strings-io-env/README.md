@@ -231,16 +231,16 @@ at follow, the most important things are:
 # Part 2
 
  4. Print out the address of (i.e., using the `&` operator) of each of the
-    variables `s1`, `s2`, and `s3`, as an long unsigned integer in decimal
+    variables `s1`, `s2`, and `s3`, as a long unsigned integer in decimal
     format (i.e., format `"%lu"`), each on a line by itself.
 
-    The C compiler will complain that you are passing `char *` where an
+    The C compiler will complain that you are passing `char *` where a
     `long unsigned int` was expected.  Usually, that means that you are doing
     something wrong!  For this exercise, you can tell the compiler to simply
-    treat the value like an `unsigned int` by explicitly type-casting it
-    as such.  To do so, preface it with `(unsigned int)`.  Please note that
-    this does not change anything with regard to the value of the pointer; it
-    merely tells the compiler that you are using it differently.
+    treat the value like a `long unsigned int` by explicitly type-casting it
+    as such.  To do so, preface it with `(long unsigned int)`.  Please note
+    that this does not change anything with regard to the value of the pointer;
+    it merely tells the compiler that you are using it differently.
 
     Note that this exercise has nothing to do with the actual _value_ of the
     variables, which will be compared in a subsequent question.  Rather, this
@@ -250,19 +250,20 @@ at follow, the most important things are:
     which and why?*
 
  5. Print out the address _referred to_ (i.e., its pointer value) by each of
-    the variables `s1`, `s2`, and `s3` as an unsigned integer in decimal format
-    (i.e., format `"%u"`), each on a line by itself.  Since all these variables
-    refer to arrays/strings, you can also think of each referred-to addresses
-    as that of the _first byte/character_ in each array/string referred to.
+    the variables `s1`, `s2`, and `s3` as a long unsigned integer in decimal
+    format (i.e., format `"%lu"`), each on a line by itself.  Since all these
+    variables refer to arrays/strings, you can also think of each referred-to
+    addresses as that of the _first byte/character_ in each array/string
+    referred to.
 
     See the comment on type casting from question 4.
 
     Note that while `s1`, `s2`, and `s3` are _declared_ differently, they
     effectively act the same, in that:
 
-    - When represented as an _integer_ value (i.e., format `"%u"`), `printf()`
-      uses the referred-to address (i.e., the _pointer value_) as a
-      replacement.
+    - When represented as a (long unsigned)  _integer_ value (i.e., format
+      `"%lu"`), `printf()` uses the referred-to address (i.e., the _pointer
+      value_) as a replacement.
     - When represented as a _string_ value (i.e., format `"%s"`), `printf()`
       uses the values _at_ the referred-to address (i.e., the string contents)
       as a replacement.
