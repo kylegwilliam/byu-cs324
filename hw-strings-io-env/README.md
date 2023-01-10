@@ -161,7 +161,7 @@ fprintf(stdout, "hello %d\n", 42);
 ```
 
 ```c
-fputs("hello 42\n");
+fputs("hello 42\n", stdout);
 ```
 
 ```c
