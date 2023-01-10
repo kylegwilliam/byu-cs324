@@ -184,14 +184,14 @@ at follow, the most important things are:
 # Part 1
 
  1. Find the number of bytes/characters allocated on the stack for `s1`
-    using the `sizeof()` operator (not `strlen()`!).  Note that
-    `sizeof()` is a _compile-time_ operator; that means that the size (i.e.,
-    the number of bytes allocated) is determined at compile time, before the
-    code ever runs.  In this case, `sizeof()` accurately reflects the number of
-    bytes allocated for (i.e., the "size" of) `s1` because `s1` is explicitly
-    assigned a value using a string literal.  The same would not be true for
-    something dynamically allocated (i.e., at _run time_) with `malloc()`; it
-    simply couldn't be known ahead of time.
+    using the `sizeof()` operator (not `strlen()`!).  Note that `sizeof()` is a
+    _compile-time_ operator; that means that the size (i.e., the number of
+    bytes allocated) is determined at compile time, before the code ever runs.
+    In this case, `sizeof()` accurately reflects the number of bytes allocated
+    for (i.e., the "size" of) `s1` because `s1` is explicitly assigned a value
+    using a string literal.  The same would not be true for something
+    dynamically allocated (i.e., at _run time_) with `malloc()`; it simply
+    couldn't be known ahead of time.
 
     Save the value as `s1_len`, and then print `s1_len` on a line by itself,
     using `printf()`.
@@ -200,8 +200,12 @@ at follow, the most important things are:
     visible characters in `s1`?*
 
  2. Find the number of bytes/characters allocated on the stack for `s2` using
-    the same methodology as you used for question 1.  Save that value as
-    `s2_len`, and then print `s2_len` on a line by itself, using `printf()`.
+    the same methodology as you used for question 1.  Note that although
+    an initial value is not explicitly assigned to `s2`, as it is with `s1`,
+    the size of the array is explicitly given, so `sizeof()` can again be used.
+
+    Save that value as `s2_len`, and then print `s2_len` on a line by itself,
+    using `printf()`.
 
     *How does the number of bytes allocated for `s2` compare to the declared
     number of bytes for `s2`?*
