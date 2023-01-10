@@ -494,7 +494,7 @@ at follow, the most important things are:
         for `open(2)`.)
 
  28. Call `close()` on `fd1`, and use `printf()` to print the return value on a
-     line by itself.  Then call close on `fd1`, and use `printf()` to print the
+     line by itself.  Then call close on `fd2`, and use `printf()` to print the
      return value on a line by itself.
 
      a. *What is the return value of the first instance of `close()`?  What does
@@ -504,7 +504,8 @@ at follow, the most important things are:
 
      b. What is the return value of the second instance of `close()`?  What does
         this mean, and what is the likely cause?
-        (Hint: See the RETURN VALUE section in the man page for `close(2)`.)
+	(Hint: See the RETURN VALUE section in the man page for `close(2)`. See
+        also question 24b.)
 
 
 # Part 6
