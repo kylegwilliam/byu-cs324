@@ -324,8 +324,8 @@ arguments passed have the following values:
    `argv`, etc.
 
    ```c
-   cmds[0] = 0; // (i.e., the index of "/bin/cat" in `argv`)
-   cmds[1] = 4; // (i.e., the index of "/bin/grep" in `argv`)
+   cmds[0] = 0; // 0 is the index of "/bin/cat" in argv
+   cmds[1] = 4; // 4 the index of "/bin/grep" in argv
    ```
 
  - `argv` mostly looks the same as it did before, except that pointers to the
@@ -335,12 +335,12 @@ arguments passed have the following values:
 
    ```c
    argv[0] = "/bin/cat";
-   argv[1] = NULL; // <-- this is the end of the argment list for the first command
+   argv[1] = NULL; // <-- this is the end of the argment list for command 0
    argv[2] = "test.txt";
    argv[3] = NULL;
    argv[4] = "/bin/grep";
    argv[5] = "foo";
-   argv[6] = NULL; // <-- this is the end of the argument list for the second command
+   argv[6] = NULL; // <-- this is the end of the argument list for command 1
    argv[7] = "test2.txt";
    argv[8] = NULL;
    ```
@@ -361,10 +361,10 @@ arguments passed have the following values:
    than 0 indicates that that command has no input or output redirection.
 
    ```c
-   stdin_redir[0] = 2; // i.e., the standard input of `cmds[0]` (i.e., "/bin/cat") has been redirected to `argv[2]` (i.e., "test.txt")
-   stdin_redir[1] = -1; // i.e., the standard input of `cmds[1]` (i.e., "/bin/grep") has not been redirected.
-   stdout_redir[0] = -1; // i.e., the standard input of `cmds[0]` (i.e., "/bin/cat") has not been redirected.
-   stdout_redir[1] = 7; // i.e., the standard input of `cmds[1]` (i.e., "/bin/grep") has been redirected to `argv[7]` (i.e., "test2.txt")
+   stdin_redir[0] = 2; // stdin for command 0 ("/bin/cat") has been redirected to argv[2] ("test.txt")
+   stdin_redir[1] = -1; // stdin for command 1 ("/bin/grep") has not been redirected.
+   stdout_redir[0] = -1; // stdout for command 0 ("/bin/cat") has not been redirected.
+   stdout_redir[1] = 7; // stdout for command 1 ("/bin/grep") has been redirected to argv[7] ("test2.txt")
    ```
 
    Note, however, that only the first command in a pipeline will ever have its
@@ -507,12 +507,7 @@ Thus, the process is:
      the file descriptors that you need; it is safe to close all others.  An
      illustration of what the final product should look like is shown below:
 
-     <img src="pipeline.png" width="400">
-
-     Note that file descriptor 2 (standard error) is not shown in the above
-     image for the sake of clarity.  File descriptor 2 should not closed; it
-     simply is unchanged.  See the redirection image in the
-     [previous section](#single-command) for an example.
+     <img src="pipeline-2cmds.png" width="400">
 
      If your pipeline hangs, it is likely because some descriptors have
      accidentally been left open. Check, check, and check again.
@@ -546,6 +541,10 @@ and 2) the resources for every process have been reaped appropriately.
 A simple loop is sufficient for this.  The processes do _not_ have to be waited
 on in any particular order--at least not for the purposes of this lab.  The
 goal is that they all closed before returning from `eval()`.
+
+
+An illustration of what the final product should look like is shown below:
+<img src="pipeline.png" width="400">
 
 The tools that you will use for this are:
 
