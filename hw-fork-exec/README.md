@@ -208,8 +208,8 @@ the same system-wide file description can write to the same open file.
          the file descriptor of the newly opened file.
        - Immediately after writing to the file, call `fclose()` on the file.
 
-	 Note that `fclose()` calls `close()` on the file descriptor, after
-	 flushing the buffer of the file stream (see the man page for
+         Note that `fclose()` calls `close()` on the file descriptor, after
+         flushing the buffer of the file stream (see the man page for
          `fclose()`).
        - sleep for 5 seconds.
 
