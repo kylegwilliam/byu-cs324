@@ -301,7 +301,7 @@ child processes and maintained after a call to `exec`.
      echo foobar | ./fork /bin/cat
      ```
 
-     *Show the output from running the above pipeline.*
+     *Show the output from running the pipeline.*
 
 
 # Part 8: File Descriptor Duplication
@@ -325,7 +325,7 @@ using `dup2()`.
      echo foobar | ./fork /bin/cat
      ```
 
-     *Show the output from running this. Also show the contents of
+     *Show the output from running the pipeline. Also show the contents of
      `fork-output.txt`.*
 
      Note that you might find that the buffer associated with the open file
