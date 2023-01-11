@@ -373,6 +373,16 @@ at follow, the most important things are:
      `memprint()` on `s4` to show each byte/character value in the array as
      hexadecimal (i.e., format `"%02x"`).
 
+     The C compiler will complain that the number of characters that will be
+     used to represent the integer (i.e., `%d`) could possibly exceed the size
+     of the buffer.   This is true.  A signed 32-bit integer could be as low as
+     -2147483648 (11 digits) or it could be 0 (1 digit). In the former case, it
+     would overflow the buffer we have allocated.  For the purposes of this
+     assignment, please ignore the warning.  We have hard-coded the value of
+     `myval`, so we know the number of characters the will be needed to
+     represent `myval` in replacing `%d`.  In a real program, however, please
+     use more care.
+
      *In which places of the array was a null value placed?*
 
 
