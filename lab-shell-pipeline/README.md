@@ -436,7 +436,7 @@ the process is:
      illustration of what the final product should look like when a file is
      opened for output redirection is shown below:
 
-     <img src="redirection.png" width="400">
+     <img src="redirection.png" width="600">
    - Run the executable in the context of the child process using `execve()`.
  - In the parent process:
    - Put the child process in its own process group, for which the group ID is
@@ -507,7 +507,7 @@ Thus, the process is:
      the file descriptors that you need; it is safe to close all others.  An
      illustration of what the final product should look like is shown below:
 
-     <img src="pipeline-2cmds.png" width="400">
+     <img src="pipeline-2cmds.png" width="600">
 
      If your pipeline hangs, it is likely because some descriptors have
      accidentally been left open. Check, check, and check again.
@@ -544,7 +544,8 @@ goal is that they all closed before returning from `eval()`.
 
 
 An illustration of what the final product should look like is shown below:
-<img src="pipeline.png" width="400">
+
+<img src="pipeline.png" width="600">
 
 The tools that you will use for this are:
 
