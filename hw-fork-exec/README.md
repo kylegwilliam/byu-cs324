@@ -214,7 +214,9 @@ the same system-wide file description can write to the same open file.
      the file?*
 
  20. *Based on both the contents of `fork-output.txt` and what was written to
-     the terminal, which file descriptors were inherited by the child process?*
+     the terminal, which file descriptors were inherited by the child process?
+     (Hint: See also the "Note the following further points" in the man page
+     for `fork()`.)*
 
  21. Consider the timing of the two `fprintf()` calls made _after_ the call to
      `fork()` that caused processes to write to `fork-output.txt`.  The
