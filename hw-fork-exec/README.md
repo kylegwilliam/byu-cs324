@@ -214,9 +214,9 @@ the same system-wide file description can write to the same open file.
      the file?*
 
  20. *Based on both the contents of `fork-output.txt` and what was written to
-     the terminal, which file descriptors were inherited by the child process?
-     (Hint: See also the "Note the following further points" in the man page
-     for `fork()`.)*
+     the terminal, which file descriptor(s) were inherited by the child
+     process?  (Hint: See also the "Note the following further points" in the
+     man page for `fork()`.)*
 
  21. Consider the timing of the two `fprintf()` calls made _after_ the call to
      `fork()` that caused processes to write to `fork-output.txt`.  The
@@ -224,7 +224,7 @@ the same system-wide file description can write to the same open file.
 
      *Based on the content of `fork-output.txt`, did the later process start
      writing to the file at the beginning, or continue where it left off after
-     the last call?  Why?*  (Hint: See the section titled "Open file
+     the last call?  Why?  (Hint: See the section titled "Open file
      descriptions" in the man page for `open(2)`.)*
 
  22. Consider the timing of the `fclose()` call in relation to the later call
@@ -234,7 +234,8 @@ the same system-wide file description can write to the same open file.
 
      *Based on the content of `fork-output.txt`, was the later process able to
      write to the file after it was closed?  Why or why not?  (Hint: See the
-     second paragraph in the "DESCRIPTION" section of the man page for `close(2)`.)*
+     second paragraph in the "DESCRIPTION" section of the man page for
+     `close(2)`.)*
 
 
 # Part 6: Pipes
@@ -242,7 +243,7 @@ the same system-wide file description can write to the same open file.
 In this section, you will learn how pipes are created and used to communicate
 between different processes.
 
- 18. Modify `fork.c` according to the following:
+ 23. Modify `fork.c` according to the following:
 
      - Prior to the call to `fork()`, open a pipe (see the man page for
        `pipe()`).
@@ -279,7 +280,7 @@ between different processes.
 In this section, you will learn hands-on how file descriptors are inherited by
 child processes and maintained after a call to `exec`.
 
- 19. Modify `fork.c` according to the following:
+ 24. Modify `fork.c` according to the following:
 
      - Copy the contents of the `main()` function in `exec.c` into `fork.c` in
        such a way that the _child_ process created with the call to `fork()`
@@ -302,7 +303,7 @@ child processes and maintained after a call to `exec`.
 In this section, you will learn hands-on how file descriptors can be duplicated
 using `dup2()`.
 
- 20. Modify `fork.c` according to the following:
+ 25. Modify `fork.c` according to the following:
 
      - Immediately before calling `execve()`, duplicate the file descriptor
        associated with the file stream you opened in connection with
