@@ -175,6 +175,7 @@ input forever--unless and until one of two things happens:
    input from standard input.  With a keyboard, an EOF can be sent with
    `ctrl`+`d`.  When EOF is detected, the shell also calls `exit(0)`,
    terminating the process.
+
 Try either one of these to make the shell exit and to return to the shell from
 which you called `./tshref`.
 
@@ -323,8 +324,8 @@ arguments passed have the following values:
    `argv`, etc.
 
    ```c
-   cmds[0] = 0;
-   cmds[1] = 4;
+   cmds[0] = 0; // (i.e., the index of "/bin/cat" in `argv`)
+   cmds[1] = 4; // (i.e., the index of "/bin/grep" in `argv`)
    ```
 
  - `argv` mostly looks the same as it did before, except that pointers to the
@@ -334,12 +335,12 @@ arguments passed have the following values:
 
    ```c
    argv[0] = "/bin/cat";
-   argv[1] = NULL;
+   argv[1] = NULL; // <-- this is the end of the argment list for the first command
    argv[2] = "test.txt";
    argv[3] = NULL;
    argv[4] = "/bin/grep";
    argv[5] = "foo";
-   argv[6] = NULL;
+   argv[6] = NULL; // <-- this is the end of the argument list for the second command
    argv[7] = "test2.txt";
    argv[8] = NULL;
    ```
@@ -360,10 +361,10 @@ arguments passed have the following values:
    than 0 indicates that that command has no input or output redirection.
 
    ```c
-   stdin_redir[0] = 2;
-   stdin_redir[1] = -1;
-   stdout_redir[0] = -1;
-   stdout_redir[1] = 7;
+   stdin_redir[0] = 2; // i.e., the standard input of `cmds[0]` (i.e., "/bin/cat") has been redirected to `argv[2]` (i.e., "test.txt")
+   stdin_redir[1] = -1; // i.e., the standard input of `cmds[1]` (i.e., "/bin/grep") has not been redirected.
+   stdout_redir[0] = -1; // i.e., the standard input of `cmds[0]` (i.e., "/bin/cat") has not been redirected.
+   stdout_redir[1] = 7; // i.e., the standard input of `cmds[1]` (i.e., "/bin/grep") has been redirected to `argv[7]` (i.e., "test2.txt")
    ```
 
    Note, however, that only the first command in a pipeline will ever have its
@@ -440,7 +441,7 @@ the process is:
  - In the parent process:
    - Put the child process in its own process group, for which the group ID is
      the same as the process ID of the child process.  You can use
-     `setpgid(pid, pid)`, where pid is the process ID of the child process.
+     `setpgid(pid, pid)`, where `pid` is the process ID of the child process.
      This makes it so that any signals sent to the group ID of the child
      process do not also go to the shell itself, which would effectively
      terminate the shell!
