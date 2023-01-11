@@ -505,11 +505,13 @@ Thus, the process is:
      `dup2()`), calling `close()` on only one of them will not close the
      file--only de-reference the file description entry.  So leave open only
      the file descriptors that you need; it is safe to close all others.  An
-     illustration of what the final product should look like is shown below:
+     illustration of what a pipeline with two commands, as well as both input
+     and output redirection is shown below:
 
      <img src="pipeline-2cmds.png" width="800">
 
-     If your pipeline hangs, it is likely because some descriptors have
+     Note that all file descriptors have been closed, except those that are in
+     use.  If your pipeline hangs, it is likely because some descriptors have
      accidentally been left open. Check, check, and check again.
    - Run the executable in the context of the child process using `execve()`.
  - In the parent process:
@@ -542,10 +544,6 @@ A simple loop is sufficient for this.  The processes do _not_ have to be waited
 on in any particular order--at least not for the purposes of this lab.  The
 goal is that they all closed before returning from `eval()`.
 
-
-An illustration of what the final product should look like is shown below:
-
-<img src="pipeline.png" width="800">
 
 The tools that you will use for this are:
 
@@ -597,6 +595,15 @@ their memory location is not important, only their value.  For example, if `y`
 contains a file descriptor to be saved, the code `x = y;` works just fine,
 after which `x` can be used in place of `y` for "file" operations, and `y` can
 be overwritten.
+
+An illustration of what a pipeline with three commands as well as both input
+and output redirection is shown below:
+
+<img src="pipeline.png" width="800">
+
+Note that all file descriptors have been closed, except those that are in use.
+Again, if your pipeline hangs, it is likely because some descriptors have
+accidentally been left open. Check, check, and check again.
 
 Just as with the two-command pipeline, a shell handling a pipeline with an
 arbitrary number of commands must: 1) wait for each child process after _all_
