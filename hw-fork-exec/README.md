@@ -133,20 +133,22 @@ this, you will want to read all of problems 9 through 15 before you start.
  11. *What is different between the output of the two `ps` commands?  Briefly
      explain.*
     
- 12. If you were to run the `fork` and `ps` commands from #9 again at the same
-     times as you did before, *what special line of code could you add to
-     `fork.c` to eliminate the process with state "Z" from the output of the
+ 12. If you were to run the `fork` and `ps` commands from question 10 again at
+     the same times as you did before, *what special line of code could you add
+     to `fork.c` to eliminate the process with state "Z" from the output of the
      second `ps` command?*
 
  13. Referring to the previous question, *where would this line most
      appropriately go?*
 
-     Add that line to `fork.c`, and re-`make` (note: you may also need to add a
-     few `#include` statements at the top of the file for it to compile and run
-     properly--see the man page for the function to learn which to include).
-     Then re-`make`.
+ 14. Add the line of code referenced in question 12 to the location referenced
+     in question 13.  Then call `make` to re-compiled `fork.c`. (Note that you
+     may also need to add a few `#include` statements at the top of the file
+     for it to compile and run properly.  See the man page for the function to
+     learn which to include.)
 
- 14. Follow the instructions from #9 again to verify your answer from #11.
+     Follow the instructions from question 10 again to verify your answers to
+     questions 12 and 13.
 
      *Show the two `ps` commands you used, each followed by its respective
      output.*
@@ -156,17 +158,17 @@ this, you will want to read all of problems 9 through 15 before you start.
     
  16. Modify `fork.c` according to the following:
 
-     - Comment out the line of code you added in #11, until a later part of the
-       assignment.
+     - Comment out the line of code you added in question 14, until a later
+       part of the assignment.
      - Replace the single call to `sleep()` in Section B with two 30-second
        `sleep()` calls, back-to-back.
      - Replace the two back-to-back calls to `sleep()` in Section C with a
        single 30-second `sleep()` call.
 
      Re-`make`, then run `fork` in the left pane of your tmux window.  In the
-     right pane, run the `ps` command with the same options as in #9, first
-     during the initial 30-second sleep call, then again after "Section C done
-     sleeping" is printed.
+     right pane, run the `ps` command with the same options as in question 10,
+     first during the initial 30-second sleep call, then again after "Section C
+     done sleeping" is printed.
 
      *Show the two `ps` commands, each followed by its respective output.*
 
@@ -176,8 +178,8 @@ this, you will want to read all of problems 9 through 15 before you start.
 You can now close the right pane in tmux.  Further commands will only use a
 single pane.
 
-Now would be a good time to review questions 7 and 8, both to confirm or update
-your answers and to check your understanding.
+Now would be a good time to review questions 7 through 9, both to confirm or
+update your answers and to check your understanding.
 
 
 # Part 5: File Descriptor Inheritance and File Description Sharing
@@ -188,24 +190,28 @@ the same system-wide file description can write to the same open file.
 
  18. Modify `fork.c` according to the following:
 
-     - Un-comment the line you added in #11.
+     - Un-comment the line you added in question 14.
      - Comment out _all_ calls to `sleep()`.
      - Comment out _all_ `printf()` calls that print "...done sleeping".
      - Before the call to `fork()`, open the file `fork-output.txt` for writing
        (see the man page for `fopen`).
      - Write "BEFORE FORK\n" to the file before the call to `fork()`.
-     - In section A, write "SECTION A (%d)\n" to the file replacing "%d" with
-       the file descriptor of the newly opened file (see the man page for
-       `fileno()`).
-     - In section B, sleep for 5 seconds, then write "SECTION B (%d)\n" to the
-       file, replacing "%d" with the file descriptor of the newly opened file.
-     - In section C, write "SECTION C (%d)\n" to the file you opened, replacing
-       "%d" with the file descriptor of the newly opened file.  Immediately
-       after writing to the file, call `fclose()`.  Then sleep for 5 seconds.
+     - In section A:
+       - Write "SECTION A (%d)\n" to the file, replacing "%d" with the file
+         descriptor of the newly opened file (see the man page for `fileno()`).
+     - In section B, the following, in order:
+       - Sleep for 5 seconds
+       - write "SECTION B (%d)\n" to the file, replacing "%d" with the
+         file descriptor of the newly opened file.
+     - In section C, do the following, in order:
+       - write "SECTION C (%d)\n" to the file you opened, replacing "%d" with
+         the file descriptor of the newly opened file.
+       - Immediately after writing to the file, call `fclose()` on the file.
 
-       Note that `fclose()` calls `close()` on the file descriptor, after
-       flushing the buffer of the file stream (see the man page for
-       `fclose()`).
+	 Note that `fclose()` calls `close()` on the file descriptor, after
+	 flushing the buffer of the file stream (see the man page for
+         `fclose()`).
+       - sleep for 5 seconds.
 
      Re-`make` and run the newly recompiled `fork`. *Using `cat`, show the
      contents of the `fork-output.txt` file you created.*
@@ -313,13 +319,6 @@ using `dup2()`.
        ordering of the arguments passed to `dup2()`, or this will not work
        properly.
 
-       Note that if you did not use `fflush()` after writing to the file stream
-       associated with `fork-output.txt`, as recommended in question 16, you
-       might find that the buffer associated with the open file stream is
-       destroyed--as part of the re-initialization of the stack and heap, in
-       connection with `execve()`, before it is ever flushed.  In this case,
-       the statements you wrote will never make it to the file!
-
      Re-make and execute the following to show that it works:
 
      ```
@@ -329,7 +328,9 @@ using `dup2()`.
      *Show the output from running this. Also show the contents of
      `fork-output.txt`.*
 
-
-# Submission
-
-Upload `forkexec.txt` to the assignment page on LearningSuite.
+     Note that you might find that the buffer associated with the open file
+     stream (i.e., `FILE *`) is destroyed--as part of the re-initialization
+     of the stack and heap, in connection with `execve()`, before it is ever
+     flushed.  In this case, the statements you wrote to the file _before_
+     calling `execve()` will never make it to the file!  You could fix this by
+     using `fflush()` immediately after `fprintf()`.
