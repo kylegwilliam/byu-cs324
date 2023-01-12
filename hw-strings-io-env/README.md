@@ -451,9 +451,10 @@ at follow, the most important things are:
 	Why or why not?* (Hint: See the RETURN VALUE section in the man page
         for `read(2)`.)
 
-     b. *Was a null character included?  Why or not?* (Hint: To answer the
-	"why" question, use the `hexdump` command-line utility to inspect the
-        contents of `test.txt`.)
+     b. *Was a null character included in the bytes read or immediately
+	following them?  Why or why not?  (Hint: To answer the "why" question,
+	use the `hexdump` command-line utility to inspect the contents of
+        `test.txt`.)
 
  24. Use the `read()` system call to read up to 4 bytes from `fd2` (not
      `fd1`!).  Instead of using `buf` as the starting point at which the read
