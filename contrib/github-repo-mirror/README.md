@@ -172,9 +172,10 @@ This is a one-time process to clone the private repository you have created.
 # Create Additional Clones of Your Private Repository (Optional)
 
 If you would like to create additional clones of your private repository on
-other machines (e.g., a laptop), follow
-[the instructions for creating a clone](#create-a-clone-of-your-private-repository).
-on that machine.  Just remember that you will need to keep all clones
+other machines (e.g., a laptop), follow the instructions for both
+[registering SSH keys](#register-an-ssh-key-for-use-with-github) and
+[creating a clone](#create-a-clone-of-your-private-repository).
+on _that_ machine.  Just remember that you will need to keep all clones
 [up-to-date](#update-your-mirrored-repository-from-the-upstream)!
 
 
