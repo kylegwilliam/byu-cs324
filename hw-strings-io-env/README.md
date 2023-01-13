@@ -448,12 +448,12 @@ at follow, the most important things are:
      hexadecimal (i.e., format `"%02x"`).
 
      a. *Did the return value from `read()` match the count value passed in?
-	Why or why not?* (Hint: See the RETURN VALUE section in the man page
+        Why or why not?* (Hint: See the RETURN VALUE section in the man page
         for `read(2)`.)
 
      b. *Was a null character included in the bytes read or immediately
-	following them?  Why or why not?  (Hint: To answer the "why" question,
-	use the `hexdump` command-line utility to inspect the contents of
+        following them?  Why or why not?  (Hint: To answer the "why" question,
+        use the `hexdump` command-line utility to inspect the contents of
         `test.txt`.)
 
  24. Use the `read()` system call to read up to 4 bytes from `fd2` (not
@@ -519,7 +519,7 @@ at follow, the most important things are:
 
      b. What is the return value of the second instance of `close()`?  What does
         this mean, and what is the likely cause?
-	(Hint: See the RETURN VALUE section in the man page for `close(2)`. See
+        (Hint: See the RETURN VALUE section in the man page for `close(2)`. See
         also question 24b.)
 
 
@@ -533,6 +533,8 @@ at follow, the most important things are:
      Run your code with and without the `CS324_VAR` environment variable set
      and with different values.
 
-     *What command line did you use to get your code to find a `CS324_VAR`
-     value of "awesome" (without quotes)?* (Hint: `FOO=var ./cmd` sets the
-     environment variable `FOO` to `var` for the single running instance of `cmd`.
+     *What command line did you use to assign the environment variable
+     `CS324_VAR` the value of "awesome" (without quotes) such that it could be
+     retrieved by your program when it is run?* (Hint: `FOO=var ./cmd` sets the
+     value of the environment variable `FOO` to `var` for the single running
+     instance of `cmd`.)
