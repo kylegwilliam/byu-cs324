@@ -415,7 +415,7 @@ at follow, the most important things are:
      After each, print a newline character, so each printout is on its own line.
 
      *Is there a difference between what was printed by `printf()` and what was
-     printed by `write()`?*  Why or why not?  (Hint: See the `s` Conversion
+     printed by `write()`?  Why or why not?*  (Hint: See the `s` Conversion
      Specifier in the man page for `printf(3)`.)
 
  21. Print out the contents of `buf` to standard error (not standard out!) in
