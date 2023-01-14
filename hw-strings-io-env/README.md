@@ -517,8 +517,8 @@ at follow, the most important things are:
         (Hint: See the RETURN VALUE section in the man page for `close(2)`.  See
         also question 24b.)
 
-     b. What is the return value of the second instance of `close()`?  What does
-        this mean, and what is the likely cause?
+     b. *What is the return value of the second instance of `close()`?  What does
+        this mean, and what is the likely cause?*
         (Hint: See the RETURN VALUE section in the man page for `close(2)`. See
         also question 24b.)
 
