@@ -452,7 +452,7 @@ at follow, the most important things are:
         for `read(2)`.)
 
      b. *Was a null character included in the bytes read or immediately
-        following them?  Why or why not?  (Hint: To answer the "why" question,
+        following them?  Why or why not?*  (Hint: To answer the "why" question,
         use the `hexdump` command-line utility to inspect the contents of
         `test.txt`.)
 
