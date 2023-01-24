@@ -520,7 +520,7 @@ Thus, the process is:
    - Close any open file descriptors that are exclusively for use by the
      child processes.
 
-The processes for all commands in a pipeline should be in the same progress
+The processes for all commands in a pipeline should be in the same process
 group, and that group is different than that of the parent (i.e., the shell).
 The group ID for commands in a pipeline should be the process ID of the first
 command in the pipeline.  Thus, for each command, after `fork()` is called, the
