@@ -212,7 +212,8 @@ the same system-wide file description can write to the same open file.
      - In section B, the following, in order:
        - Sleep for 5 seconds
        - write "SECTION B (%d)\n" to the file, replacing "%d" with the
-         file descriptor of the newly opened file.
+         file descriptor of the newly opened file (see the man page for
+         `fileno()`).
      - In section C, do the following, in order:
        - write "SECTION C (%d)\n" to the file you opened, replacing "%d" with
          the file descriptor of the newly opened file.
