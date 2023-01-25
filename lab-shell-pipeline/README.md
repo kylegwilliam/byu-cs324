@@ -40,16 +40,20 @@ walk-through usage of the reference shell.  You will begin coding in the
 ## Reading
 
 Read the following in preparation for this assignment:
-  - Sections 8.2 - 8.4 and 10.8 - 10.10 in the book
-  - The man pages for the following system calls:
-    - `fork()`
-    - `pipe()`
-    - `dup2()`
-    - `close()`
-    - `waitpid()`
-    - `exec`
-    - `execve()`
-    - `setpgid()`
+
+ - Sections 8.2 - 8.4 and 10.8 - 10.10 in the book
+
+Additionally, man pages for the following are also referenced throughout the
+assignment:
+
+ - `fork()`
+ - `pipe()`
+ - `dup2()`
+ - `close()`
+ - `waitpid()`
+ - `exec`
+ - `execve()`
+ - `setpgid()`
 
 
 ## Resources Provided
