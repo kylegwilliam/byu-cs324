@@ -15,10 +15,10 @@ assignment before beginning!
     Additionally, man pages for the following are also referenced throughout
     the assignment:
 
-    - `fork`
-    - `execve`
-    - `pipe`
-    - `dup2`
+    - `fork()`
+    - `execve()`
+    - `pipe()`
+    - `dup2()`
 
  2. Run `make` to build two executables: `fork` and `exec`.  These are programs
     that illustrate the system calls `fork()` and `exec()`.
