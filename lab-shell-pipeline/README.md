@@ -427,7 +427,16 @@ the process is:
  - Fork a child process.
  - In the child process:
    - Check the command for any input or output redirection, and perform that
-     redirection.
+     redirection.  This involves opening the file for reading or writing,
+     respectively, and duplicating the newly-opened file descriptor onto
+     standard input or standard output, respectively.
+
+     Note that for input redirection, you should open the file with mode `"r"`
+     or `O_RDONLY` for `fopen()` or `open()`, respectively, and for output
+     redirection, you should open the file with mode `"w"` or
+     `O_WRONLY | O_CREAT | O_TRUNC` for `fopen()` or `open()`, respectively.
+     For output redirection, this creates a file that does not already exist or
+     truncates a file that does exist.
    - Close any open file descriptors that will not be used by the child
      process.  This includes file descriptors that were created as part of
      input/output redirection.
