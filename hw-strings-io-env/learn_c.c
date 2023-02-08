@@ -65,10 +65,20 @@ int part1() {
 	// Make any other variable declarations here.
 
 	printf("===== Question 1 =====\n");
+	s1_len = sizeof(s1);
+	printf("%d", s1_len);
+	printf("\n");
 
 	printf("===== Question 2 =====\n");
+	s2_len = sizeof(s2);
+	printf("%d", s2_len);
+	printf("\n");
+	
 
 	printf("===== Question 3 =====\n");
+	memprint(s1, "%02x",  s1_len);
+	memprint(s1, "%d", s1_len);
+	memprint(s1, "%c", s1_len);
 	
 	return s1_len;
 }
@@ -83,20 +93,98 @@ void part2(int len) {
 
 	printf("===== Question 4 =====\n");
 
+	printf("%lu\n", (long unsigned int)&s1);
+	printf("%lu\n", (long unsigned int)&s2);
+	printf("%lu\n", (long unsigned int)&s3);
+
+
 	printf("===== Question 5 =====\n");
+
+	printf("%lu\n", (long unsigned int)s1);
+	printf("%lu\n", (long unsigned int)s2);
+	printf("%lu\n", (long unsigned int)s3);
 
 	printf("===== Question 6 =====\n");
 
+	printf("%s\n", s1);
+	printf("%s\n", s2);
+	printf("%s\n", s3);
+
 	printf("===== Question 7 =====\n");
 
+	if (s1 == s2) {
+		printf("s1 == s2");
+		printf("\n");
+	}
+
+	if (s1 == s3) {
+		printf("s1 == s3");
+		printf("\n");
+	}
+
+	if (s2 == s3) {
+		printf("s2 == s3");
+		printf("\n");
+	}
+
+
 	printf("===== Question 8 =====\n");
+
+	if (strcmp(s1, s2)) {
+		printf("s1 == s2");
+		printf("\n");
+	}
+
+	if (strcmp(s1, s3)) {
+		printf("s1 == s3");
+		printf("\n");
+	}
+
+	if (strcmp(s2, s3)) {
+		printf("s2 == s3");
+		printf("\n");
+	}
 
 	s1[1] = 'a';
 	printf("===== Question 9 =====\n");
 
+	printf("%s\n", s1);
+	printf("%s\n", s2);
+	printf("%s\n", s3);
+
 	printf("===== Question 10 =====\n");
 
+	if (s1 == s2) {
+		printf("s1 == s2");
+		printf("\n");
+	}
+
+	if (s1 == s3) {
+		printf("s1 == s3");
+		printf("\n");
+	}
+
+	if (s2 == s3) {
+		printf("s2 == s3");
+		printf("\n");
+	}
+
 	printf("===== Question 11 =====\n");
+
+	if (strcmp(s1, s2)) {
+		printf("s1 == s2");
+		printf("\n");
+	}
+
+	if (strcmp(s1, s3)) {
+		printf("s1 == s3");
+		printf("\n");
+	}
+
+	if (strcmp(s2, s3)) {
+		printf("s2 == s3");
+		printf("\n");
+	}
 }
 
 void part3() {
@@ -105,6 +193,33 @@ void part3() {
 	char s3[] = { 0x61, 0x62, 0x63, 0x64, 0x65, 0x66 };
 
 	printf("===== Question 12 =====\n");
+
+	if (memcmp(s1, s2, sizeof(s1))) {
+		printf("s1 == s2");
+		printf("\n");
+	}
+	else {
+		printf("s1 != s2");
+		printf("\n");
+	}
+
+	if (memcmp(s1, s3, sizeof(s1))) {
+		printf("s1 == s3");
+		printf("\n");
+	}
+	else {
+		printf("s1 != s3");
+		printf("\n");
+	}
+
+	if (memcmp(s2, s3, sizeof(s2))) {
+		printf("s2 == s3");
+		printf("\n");
+	}
+	else {
+		printf("s2 != s3");
+		printf("\n");
+	}
 }
 
 void part4() {
@@ -116,11 +231,15 @@ void part4() {
 
 	printf("===== Question 13 =====\n");
 
+
 	printf("===== Question 14 =====\n");
 
 	printf("===== Question 15 =====\n");
 
 	printf("===== Question 16 =====\n");
+
+	strcpy(s1, s3);
+	memprint(s3, "%02x", sizeof(s3));
 
 	printf("===== Question 17 =====\n");
 }
@@ -141,7 +260,11 @@ void part5(char *filename) {
 
 	printf("===== Question 21 =====\n");
 
+	//fprintf(buf, BUFSIZE);
+	//write(buf, BUFSIZE, BUFSIZE);
+
 	printf("===== Question 22 =====\n");
+
 
 
 	nread = 0;
@@ -150,17 +273,38 @@ void part5(char *filename) {
 
 	printf("===== Question 24 =====\n");
 
+
 	printf("===== Question 25 =====\n");
+
 
 	printf("===== Question 26 =====\n");
 
 	printf("===== Question 27 =====\n");
+	
+	fopen(filename, "r");
+
+
+
 
 	printf("===== Question 28 =====\n");
+	int fd1_status = close(fd1);
+	printf("%d\n", fd1_status);
+
+	int fd2_status = close(fd2);
+	printf("%d\n", fd2_status);
+
+
 }
 
 void part6() {
 	char *s1;
 
 	printf("===== Question 29 =====\n");
+
+	s1 = getenv("CS324_VAR");
+
+	
+	
+
+
 }

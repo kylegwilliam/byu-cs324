@@ -106,6 +106,182 @@ int main(int argc, char **argv)
 */
 void eval(char *cmdline) 
 {
+    char *argv[MAXARGS];
+
+    int cmds[MAXARGS];
+    int stdin_redir[MAXARGS];
+    int stdout_redir[MAXARGS];
+
+    int pid;
+    int pid2;
+
+    int pipe_val;
+
+    parseline(cmdline, argv);
+    int num_cmds = parseargs(argv, cmds, stdin_redir, stdout_redir);
+
+
+    builtin_cmd(argv);
+
+
+    if (num_cmds > 1) {
+
+        int pipefd[2];
+
+        // PIPE CALL
+        if ((pipe_val = pipe(pipefd)) < 0) {
+            fprintf(stderr, "Cound not pipe()");
+            exit(1);
+        }
+
+
+        // First Fork()
+        pid = fork();
+
+        if (pid == 0) {
+
+            int stdin_var = stdin_redir[0];
+            char *file;
+
+            if (stdin_var != -1) {
+                file = argv[stdin_var];
+
+                FILE *fp = fopen(file, "r");
+                int int_file = fileno(fp);
+                dup2(int_file, 0);
+                close(int_file);
+
+            } 
+
+            int stdout_var = stdout_redir[0];
+
+            if (stdout_var != -1) {
+
+                file = argv[stdout_var];
+
+                FILE *fp = fopen(file, "w");
+
+                int int_file = fileno(fp);
+                dup2(int_file, 1);
+                close(int_file);
+
+            }
+
+            //Write end of the pipe is 1
+            dup2(pipefd[1], 1);
+            close(pipefd[0]);
+            close(pipefd[1]);
+
+            execve(argv[cmds[0]], &argv[cmds[0]], NULL);
+            exit(0);
+
+        }
+        else {
+
+            setpgid(pid, pid);
+
+            // Second Fork()
+            pid2 = fork();
+
+            if (pid2 == 0) {
+
+                int stdin_var = stdin_redir[1];
+                char *file;
+
+                if (stdin_var != -1) {
+                    file = argv[stdin_var];
+
+                    FILE *fp = fopen(file, "r");
+                    int int_file = fileno(fp);
+                    dup2(int_file, 0);
+                    close(int_file);
+
+                } 
+
+                int stdout_var = stdout_redir[1];
+
+                if (stdout_var != -1) {
+
+                    file = argv[stdout_var];
+
+                    FILE *fp = fopen(file, "w");
+                    int int_file = fileno(fp);
+                    dup2(int_file, 1);
+                    close(int_file);
+
+                }
+
+                //stdin = 0
+                dup2(pipefd[0], 0);
+                close(pipefd[0]);
+                close(pipefd[1]);
+
+                execve(argv[cmds[1]], &argv[cmds[1]], NULL);
+                exit(0);
+
+            }
+
+            else {
+                setpgid(pid2, pid);
+                close(pipefd[0]);
+                close(pipefd[1]);
+
+                while (wait(NULL) != -1) {
+
+                }
+            }
+            
+            // try to run the tests by myself. 
+            // Check the read me. 
+        }
+        
+    }
+
+    else { 
+
+        if ((pid = fork()) < 0) {
+		    fprintf(stderr, "Could not fork()");
+		    exit(1);
+	    }
+
+        if (pid == 0) {
+
+            int stdin_var = stdin_redir[0];
+            char *file;
+
+            if (stdin_var != -1) {
+                
+                file = argv[stdin_var];
+                FILE *fp = fopen(file, "r");
+                int int_file = fileno(fp);
+                dup2(int_file, 0);
+                close(int_file);
+
+            } 
+
+            int stdout_var = stdout_redir[0];
+
+            if (stdout_var != -1) {
+
+                file = argv[stdout_var];
+
+                FILE *fp = fopen(file, "w");
+
+                int int_file = fileno(fp);
+                dup2(int_file, 1);
+                close(int_file);
+
+            }
+
+            execve(argv[cmds[0]], &argv[cmds[0]], NULL);
+
+        }
+        else {
+            setpgid(pid, pid);
+            wait(NULL);
+        }
+    }
+
     return;
 }
 
@@ -233,7 +409,12 @@ int parseline(const char *cmdline, char **argv)
  */
 int builtin_cmd(char **argv) 
 {
-    return 0;     /* not a builtin command */
+    if (strcmp(argv[0], "quit") == 0) 
+    {
+        exit(0);
+    }
+
+    return 0;   
 }
 
 /***********************
