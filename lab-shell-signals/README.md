@@ -363,8 +363,8 @@ tsh>
 As we have seen, among the ways a state of a job can be changed is by pressing
 `ctrl`+`c` or `ctrl`+`z` while the job is in the foreground.  These each
 effectively send a signal to the shell--which the shell passes along to the
-processes associated with the job.  The process is then either stopped or the
-process, respectively.
+processes associated with the job.  The process is then either terminated
+or stopped, respectively.
 
 However, the processes associated with shell jobs are still just processes, so
 they can be signalled from outside the shell too, from other processes on the
