@@ -121,11 +121,12 @@ $ ./client -4 hostname port foo bar abc123
  3. The server prints out the _remote_ address and port associated with the
     incoming message, and the client prints out the _local_ address and port
     associated with its socket.  They should match!  *What do you notice about
-    the port value used by the client for different messages sent using the
-    _same_ socket (i.e., from running `./client` a single time)?*
- 4. *What do you notice about the port value used by the client for different
-    messages sent using _different_ sockets (i.e., from running `./client`
-    multiple times)?*
+    the value of the local port used by the client for _different_ messages
+    sent using the _same_ socket (i.e., from running `./client` a single
+    time)?*
+ 4. *What do you notice about the value of the local port used by the client
+    for _different_ messages sent using _different_ sockets (i.e., from running
+    `./client` multiple times)?*
  5. *Looking inside `server.c`, how many sockets does the server use to
     communicate with multiple clients?*  For example, one for _each_ client,
     one for _all_ clients, etc.
@@ -165,8 +166,8 @@ you ran previously in the top-right "local" pane, sending the same strings as
 before.
 
  7. Analyze the output associated with the `printf()` statements that follow
-     the calls to `getsockname()`.  *What do the differences in output teach
-     you about _when_ the local address and port are set for a given socket?*
+    the calls to `getsockname()`.  *What do the differences in output teach
+    you about _when_ the local address and port are set for a given socket?*
 
 FIXME - remove null characters
 Let's make some other observations.  First, note that the lengths (i.e., number
@@ -349,17 +350,20 @@ $ ./client -4 hostname port foo bar abc123
 $ ./client -4 hostname port foo bar abc123
 ```
 
- 15. The server prints out the remote (i.e., client-side) address and port
-     associated with the incoming message.  *What do you notice about the port
-     value used by the client for different messages sent using the _same_
-     socket (i.e., from running `./client` a single time)?*
- 16. *What do you notice about the port value used by the client for different
-     messages sent using _different_ sockets (i.e., from running `./client`
-     multiple times)?*
+ 15. The server prints out the _remote_ address and port associated with the
+     incoming message, and the client prints out the _local_ address and port
+     associated with its socket.  They should match!  *What do you notice about
+     the value of the local port used by the client for _different_ messages
+     sent using the _same_ socket (i.e., from running `./client` a single
+     time)?*
+ 16. *What do you notice about the value of the local port used by the client
+     for _different_ messages sent using _different_ sockets (i.e., from
+     running `./client` multiple times)?*
  17. *Looking inside `server.c`, how many sockets does the server use to
      communicate with multiple clients?*  For example, one for _each_ client,
-     one for _all_ clients, etc.  *How does this compare to the answer to the
-     behavior for a server-side UDP socket (see question 6)?*
+     one for _all_ clients, etc.
+ 18. *How does this compare to the answer to the behavior for a server-side UDP
+     socket (see question 5)?*
 
 Make the following modifications, which mirror those made in Part 1 (preceding
 questions 7 - 10):
@@ -384,16 +388,16 @@ pane), run the following in the top-right "local" pane:
 $ ./client -4 hostname port foo bar abc123
 ```
 
- 18. *How many total calls to `send()` / `write()` were made by the client?*
+ 19. *How many total calls to `send()` / `write()` were made by the client?*
      Hint: refer to `client.c`.
- 19. *How many messages were received by the kernel of the server-side process
+ 20. *How many messages were received by the kernel of the server-side process
      _before_ the server called `recv()`?*  You can assume that the messages
      were sent immediately with `write()` and that the network delay was
      negligible.
- 20. *How many total calls to `recv()` were required for the server process
+ 21. *How many total calls to `recv()` were required for the server process
      to read all the messages/bytes that were sent?*  Hint: look at the server
      output, and refer to `server.c`.
- 21. *How and why does the answer to question 19 differ from that from question
+ 22. *How and why does the answer to question 19 differ from that from question
      9?* Hint: see the man page for `tcp`, specifically within the first
      paragraph of the "DESCRIPTION" section.
 
@@ -459,7 +463,7 @@ Then re-run the client program:
 $ ./client -4 hostname port < alpha.txt
 ```
 
- 22. *What is the output of the pipeline ending with `sha1sum`?*
+ 23. *What is the output of the pipeline ending with `sha1sum`?*
 
      Hint: Because the bytes sent by the client should match the bytes in
      `alpha.txt`, the output of `sha1sum` should be the same as running `sha1sum`
@@ -511,10 +515,10 @@ Note that after you have run your program, `bestill.txt` should contain:
  - all three verses to a hymn.
 
 
- 23. *Show the command that you used to run your client program and
+ 24. *Show the command that you used to run your client program and
      issue the request, including input and output redirection.*
 
- 24. *Show the output to the following:*
+ 25. *Show the output to the following:*
      ```bash
      $ cat bestill.txt
      ```
@@ -536,10 +540,10 @@ output, so that you are left with just the content.  The file `socket.jpg`
 should now contain a jpeg image that you can open and view with a suitable
 program (e.g., a Web browser) to check its correctness.
 
- 25. *Show the command pipeline that you used to run your client program and
+ 26. *Show the command pipeline that you used to run your client program and
      issue the request.*
 
- 26. *Show the output to the following:*
+ 27. *Show the output to the following:*
      ```bash
      $ sha1sum socket.jpg
      ```
@@ -553,16 +557,16 @@ For this final set of questions, you are welcome to refer to previous
 code/questions, set up your own experiments, and/or read the man pages for
 `recv()` (especially), `tcp`, and `udp`.
 
- 27. What happens when you call `read()` (or `recv()`) on an open socket (UDP
+ 28. What happens when you call `read()` (or `recv()`) on an open socket (UDP
      or TCP), and there are no messages are available at the socket for reading?
      Hint: see the man page for `recv()`, especially the "DESCRIPTION" section.
 
- 28. What happens when you call `read()` (or `recv()`) on an open socket (UDP
+ 29. What happens when you call `read()` (or `recv()`) on an open socket (UDP
      or TCP), and the amount of data available is less than the requested
      amount?  Hint: see the man page for `recv()`, especially the "DESCRIPTION"
      section.
 
- 29. What happens you you call `read()` (or `recv()`) on an open UDP socket,
+ 30. What happens you you call `read()` (or `recv()`) on an open UDP socket,
      and you specify a length that is less than the length of the next
      datagram?  Hint: see the man page for `udp`, specifically within the first
      three paragraphs of the "DESCRIPTION" section.
