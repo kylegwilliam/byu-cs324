@@ -766,7 +766,9 @@ terminated.
 ## `waitfg()`
 
 The purpose of `waitfg()` is to wait on a process for as long as it is in the
-foreground.  Simply calling `waitpid()` is insufficient.
+foreground.  Simply calling `waitpid()` is insufficient because the process
+being waited on might change state, at which point it should no longer be
+waited on.
 
 `waitfg()` takes the following as an argument:
 
