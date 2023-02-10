@@ -681,8 +681,8 @@ command line corresponds to a built-in command.  Otherwise, do the following:
    - Unblock signals by restoring the mask.
    - If the job is to be run in the foreground (check the return value of
      `parseline()`), wait for the job to finish.  For now, you can simply use
-     `waitpid()`.  However, soon you will change this to `waitfg()` instead,
-     which you you will implement.
+     `waitpid()`.  However, eventually you will replace this with `waitfg()`,
+     which you will soon implement.
    - Otherwise (background job), print out a string indicating that the job is
      in the background.
 
