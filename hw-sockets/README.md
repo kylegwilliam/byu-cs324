@@ -227,9 +227,10 @@ before.
     the server's first and second calls to `recvfrom()`)?*  You can assume that
     the messages were sent immediately with `write()` and that the network
     delay was negligible.
- 10. *How many total calls to `recvfrom()` were required for the server process
-     to read all the messages/bytes that were sent?*  Hint: look at the server
-     output, and refer to `server.c`.
+ 10. *How many calls to `recvfrom()` were required for the server process to
+     read the messages/bytes that were sent _after_ the first call to
+     `recvfrom()` (i.e., referring to the previous question)?*  Hint: look at
+     the server output, and refer to `server.c`.
  11. *Why didn't the server read all the messages that were ready with a single
      call to `recvfrom()`?*  Hint: see the man page for `udp`, specifically
      within the first three paragraphs of the "DESCRIPTION" section.
@@ -394,9 +395,10 @@ $ ./client -4 hostname port foo bar abc123
      _before_ the server called `recv()`?*  You can assume that the messages
      were sent immediately with `write()` and that the network delay was
      negligible.
- 21. *How many total calls to `recv()` were required for the server process
-     to read all the messages/bytes that were sent?*  Hint: look at the server
-     output, and refer to `server.c`.
+ 21. *How many calls to `recv()` were required for the server process to
+     read the messages/bytes that were sent _after_ the first call to
+     `recv()` (i.e., referring to the previous question)?*  Hint: look at
+     the server output, and refer to `server.c`.
  22. *How and why does the answer to question 19 differ from that from question
      9?* Hint: see the man page for `tcp`, specifically within the first
      paragraph of the "DESCRIPTION" section.
