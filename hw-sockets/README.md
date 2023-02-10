@@ -229,8 +229,7 @@ before.
     delay was negligible.
  10. *How many total calls to `recvfrom()` were required for the server process to
      read all of the messages/bytes that were sent _including_ the first call to
-     `recvfrom()` (i.e., referring to the previous question)?*  Hint: look at
-     the server output, and refer to `server.c`.
+     `recvfrom()`?*  Hint: look at the server output, and refer to `server.c`.
  11. *When more than one message was ready for reading, why didn't the server
      read _all_ the messages that were ready with a single call to
      `recvfrom()`?*  Hint: see the man page for `udp`, specifically within the
