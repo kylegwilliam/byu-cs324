@@ -169,7 +169,6 @@ before.
     the calls to `getsockname()`.  *What do the differences in output teach
     you about _when_ the local address and port are set for a given socket?*
 
-FIXME - remove null characters
 Let's make some other observations.  First, note that the lengths (i.e., number
 of bytes) of the messages sent were longer than the lengths of the strings
 making up the messages.  This is because we _chose_ to explicitly include the
@@ -257,6 +256,10 @@ Make the following modifications:
    - Add a 30-second `sleep()` immediately before the `for` loop in which the
      messages are sent to the server.
    - Uncomment the read/print code that you commented out in Part 1.
+   - Uncomment the `connect()` code that you commented out in Part 1.
+   - Uncomment the `write()` code that you commented out in Part 1.
+   - Remove the `sendto()` code that you added in Part 1 to the take the place
+     of `write()`.
 
  - Modify `server.c`:
    - Make the server socket use TCP instead of UDP.
@@ -515,14 +518,23 @@ Note that after you have run your program, `bestill.txt` should contain:
  - all HTTP headers returned in the HTTP response; and
  - all three verses to a hymn.
 
+You can check this by running the following:
 
- 24. *Show the command that you used to run your client program and
-     issue the request, including input and output redirection.*
+```bash
+$ cat bestill.txt
+```
 
- 25. *Show the output to the following:*
+ 24. *Show the output to the following:*
      ```bash
-     $ cat bestill.txt
+     $ cat bestill.txt | ./strip_http.py | sha1sum
      ```
+
+     Hint: it should start with `0dd26e...`
+
+The `strip_http.py` script simply strips the HTTP response headers from the
+output, so that you are left with just the content.  The `sha1sum` result,
+therefore should only be computed with from the lyrics of the hymn, as returned
+by the server.
 
 The previous command execution involved an HTTP request for a file of type
 "text/plain", which, of course, is a plaintext file.  Now we will try to
@@ -541,10 +553,7 @@ output, so that you are left with just the content.  The file `socket.jpg`
 should now contain a jpeg image that you can open and view with a suitable
 program (e.g., a Web browser) to check its correctness.
 
- 26. *Show the command pipeline that you used to run your client program and
-     issue the request.*
-
- 27. *Show the output to the following:*
+ 25. *Show the output to the following:*
      ```bash
      $ sha1sum socket.jpg
      ```
@@ -558,18 +567,23 @@ For this final set of questions, you are welcome to refer to previous
 code/questions, set up your own experiments, and/or read the man pages for
 `recv()` (especially), `tcp`, and `udp`.
 
- 28. What happens when you call `read()` (or `recv()`) on an open socket (UDP
+ 26. What happens when you call `read()` (or `recv()`) on an open socket (UDP
      or TCP), and there are no messages are available at the socket for reading?
      Hint: see the man page for `recv()`, especially the "DESCRIPTION" section.
 
- 29. What happens when you call `read()` (or `recv()`) on an open socket (UDP
+ 27. What happens when you call `read()` (or `recv()`) on an open socket (UDP
      or TCP), and the amount of data available is less than the requested
      amount?  Hint: see the man page for `recv()`, especially the "DESCRIPTION"
      section.
 
- 30. What happens you you call `read()` (or `recv()`) on an open UDP socket,
+ 28. What happens you you call `read()` (or `recv()`) on an open UDP socket,
      and you specify a length that is less than the length of the next
      datagram?  Hint: see the man page for `udp`, specifically within the first
+     three paragraphs of the "DESCRIPTION" section.
+
+ 29. What happens you you call `read()` (or `recv()`) on an open TCP socket,
+     and you specify a length that is less than the number of bytes available
+     for reading? Hint: see the man page for udp, specifically within the first
      three paragraphs of the "DESCRIPTION" section.
 
 Close down all the terminal panes in your `tmux` session to _close_ your `tmux`
