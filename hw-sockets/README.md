@@ -400,10 +400,8 @@ $ ./client -4 hostname port foo bar abc123
      negligible.
  21. *How many total calls to `recv()` were required for the server process to
      read all of the messages/bytes that were sent?*  Hint: look at the server
-     output, and refer to `server.c`.
- 22. *How and why does the answer to question 21 differ from that from question
-     10?* Hint: see the man page for `tcp`, specifically within the first
-     paragraph of the "DESCRIPTION" section.
+     output, and refer to `server.c`.  Explain how and why this behavior is
+     different than that exemplified in question 10.
 
 
 ## Part 3: Making Your Client Issue HTTP Requests
@@ -467,7 +465,7 @@ Then re-run the client program:
 $ ./client -4 hostname port < alpha.txt
 ```
 
- 23. *What is the output of the pipeline ending with `sha1sum`?*
+ 22. *What is the output of the pipeline ending with `sha1sum`?*
 
      Hint: Because the bytes sent by the client should match the bytes in
      `alpha.txt`, the output of `sha1sum` should be the same as running `sha1sum`
@@ -524,7 +522,7 @@ You can check this by running the following:
 $ cat bestill.txt
 ```
 
- 24. *Show the output to the following:*
+ 23. *Show the output to the following:*
      ```bash
      $ cat bestill.txt | ./strip_http.py | sha1sum
      ```
@@ -553,7 +551,7 @@ output, so that you are left with just the content.  The file `socket.jpg`
 should now contain a jpeg image that you can open and view with a suitable
 program (e.g., a Web browser) to check its correctness.
 
- 25. *Show the output to the following:*
+ 24. *Show the output to the following:*
      ```bash
      $ sha1sum socket.jpg
      ```
@@ -567,21 +565,21 @@ For this final set of questions, you are welcome to refer to previous
 code/questions, set up your own experiments, and/or read the man pages for
 `recv()` (especially), `tcp`, and `udp`.
 
- 26. What happens when you call `read()` (or `recv()`) on an open socket (UDP
+ 25. What happens when you call `read()` (or `recv()`) on an open socket (UDP
      or TCP), and there are no messages are available at the socket for reading?
      Hint: see the man page for `recv()`, especially the "DESCRIPTION" section.
 
- 27. What happens when you call `read()` (or `recv()`) on an open socket (UDP
+ 26. What happens when you call `read()` (or `recv()`) on an open socket (UDP
      or TCP), and the amount of data available is less than the requested
      amount?  Hint: see the man page for `recv()`, especially the "DESCRIPTION"
      section.
 
- 28. What happens you you call `read()` (or `recv()`) on an open UDP socket,
+ 27. What happens you you call `read()` (or `recv()`) on an open UDP socket,
      and you specify a length that is less than the length of the next
      datagram?  Hint: see the man page for `udp`, specifically within the first
      three paragraphs of the "DESCRIPTION" section.
 
- 29. What happens you you call `read()` (or `recv()`) on an open TCP socket,
+ 28. What happens you you call `read()` (or `recv()`) on an open TCP socket,
      and you specify a length that is less than the number of bytes available
      for reading? Hint: see the man page for udp, specifically within the first
      three paragraphs of the "DESCRIPTION" section.
