@@ -234,6 +234,26 @@ before.
      `recvfrom()`?*  Hint: see the man page for `udp`, specifically within the
      first three paragraphs of the "DESCRIPTION" section.
 
+Change the value of the `len` argument passed to `recvfrom()` in `server.c`
+from `BUF_SIZE` to `1`.
+
+Re-run `make` to rebuild both binaries.  Then interrupt and restart the server
+in the top-left "remote" pane.
+
+With the server running on the remote host, execute (again) the client command
+you ran previously in the top-right "local" pane, sending the same strings as
+before.
+
+ 12. *How many total calls to `recvfrom()` were made?*  Hint: look at the
+     server output, and refer to `server.c`.
+
+ 13. *Were all the bytes _sent_ by the client _received_ by the application?*
+     Hint: look at the server output, and refer to `server.c`.
+
+Restore the value of the `len` argument passed to `recvfrom()` in `server.c` to
+`BUF_SIZE`.
+
+
 
 ## Part 2: TCP Sockets
 
@@ -291,12 +311,12 @@ Make the following modifications:
 Re-run `make` to rebuild both binaries.  Interrupt and restart the server in
 the top-left "remote" pane.
 
- 12. *How does the role of the original socket (i.e., `sfd`, returned from the
+ 14. *How does the role of the original socket (i.e., `sfd`, returned from the
      call to `socket()`), after `listen()` is called on it, compare with the
      role of the socket returned from the call to `accept()`?*  See the man
      pages for `listen()` and `accept()`.
 
- 13. *With the new changes you have implemented, how have the semantics
+ 15. *With the new changes you have implemented, how have the semantics
      associated with the call to `connect()` changed?  That is, what will
      happen now when you call `connect()` that is different from when you
      called `connect()` with a UDP socket?*  See the man pages for `connect()`,
@@ -312,38 +332,6 @@ $ ./client -4 hostname port foo bar abc123
 (Replace `hostname` and `port` with name of the "remote" host and the port
 on which the server program is now listening, respectively.)
 
-The `ss` command can be used to show active TCP connections on a given host.
-With both client and server running, run `ss` in the bottom "remote" pane
-during the client's 30-second sleep, i.e., _after_ the call to `connect()` but
-_before_ the client has sent any messages.
-
-Use the `-t`, `-p`, `-n` options when you run `ss` so that, respectively:
-
- - only TCP sockets are shown
- - the PIDs and command names are shown alongside the sockets listed
- - IP addresses are shown instead of names
-
-Finally, after all the above command-line options, show only sockets bound to
-the local port that you have selected for the server by adding the following
-(_including_ quotes):
-
-```
-"sport = :port"
-```
-
-(replace the "port" on the right-hand side of the colon with the actual port
-you used).
-
-See the man page for `ss` for more on how to use these options.
-
- 14. *Why does the `ss` output show an established connection ("ESTAB") between
-     client and server before any messages are sent from client to server?*
-     Hint: see the man page for `tcp`, specifically within the first two
-     paragraphs of the "DESCRIPTION" section.
-
-Make the following modification:
-  - In `client.c`, remove the 30-second `sleep()`.
-
 Re-run `make` to rebuild both binaries.  Interrupt and restart the server in
 the top-left "remote" pane.
 
@@ -354,23 +342,22 @@ $ ./client -4 hostname port foo bar abc123
 $ ./client -4 hostname port foo bar abc123
 ```
 
- 15. The server prints out the _remote_ address and port associated with the
+ 16. The server prints out the _remote_ address and port associated with the
      incoming message, and the client prints out the _local_ address and port
      associated with its socket.  They should match!  *What do you notice about
      the value of the local port used by the client for _different_ messages
      sent using the _same_ socket (i.e., from running `./client` a single
      time)?*
- 16. *What do you notice about the value of the local port used by the client
+ 17. *What do you notice about the value of the local port used by the client
      for _different_ messages sent using _different_ sockets (i.e., from
      running `./client` multiple times)?*
- 17. *Looking inside `server.c`, how many sockets does the server use to
+ 18. *Looking inside `server.c`, how many sockets does the server use to
      communicate with multiple clients?*  For example, one for _each_ client,
-     one for _all_ clients, etc.
- 18. *How does this compare to the answer to the behavior for a server-side UDP
-     socket (see question 5)?*
+     one for _all_ clients, etc.  Explain how and why this behavior is
+     different than that exemplified in question 5.
 
-Make the following modifications, which mirror those made in Part 1 (preceding
-questions 7 - 10):
+Make the following modifications, which mirror those made in Part 1
+(immediately preceding questions 8 - 11):
 
   - Modify `server.c` such that it sleeps for five seconds immediately after
     calling `accept()`.
@@ -402,6 +389,25 @@ $ ./client -4 hostname port foo bar abc123
      read all of the messages/bytes that were sent?*  Hint: look at the server
      output, and refer to `server.c`.  Explain how and why this behavior is
      different than that exemplified in question 10.
+
+Change the value of the `len` argument passed to `recv()` in `server.c` from
+`BUF_SIZE` to `1`.
+
+Re-run `make` to rebuild both binaries.  Then interrupt and restart the server
+in the top-left "remote" pane.
+
+With the server running on the remote host, execute (again) the client command
+you ran previously in the top-right "local" pane, sending the same strings as
+before.
+
+ 22. *How many total calls to `recv()` were made?*  Hint: look at the server
+     output, and refer to `server.c`.
+
+ 23. *Were all the bytes _sent_ by the client _received_ by the application?*
+     Hint: look at the server output, and refer to `server.c`.
+
+Restore the value of the `len` argument passed to `recvfrom()` in `server.c` to
+`BUF_SIZE`.
 
 
 ## Part 3: Making Your Client Issue HTTP Requests
@@ -465,7 +471,7 @@ Then re-run the client program:
 $ ./client -4 hostname port < alpha.txt
 ```
 
- 22. *What is the output of the pipeline ending with `sha1sum`?*
+ 24. *What is the output of the pipeline ending with `sha1sum`?*
 
      Hint: Because the bytes sent by the client should match the bytes in
      `alpha.txt`, the output of `sha1sum` should be the same as running `sha1sum`
@@ -522,7 +528,7 @@ You can check this by running the following:
 $ cat bestill.txt
 ```
 
- 23. *Show the output to the following:*
+ 25. *Show the output to the following:*
      ```bash
      $ cat bestill.txt | ./strip_http.py | sha1sum
      ```
@@ -551,7 +557,7 @@ output, so that you are left with just the content.  The file `socket.jpg`
 should now contain a jpeg image that you can open and view with a suitable
 program (e.g., a Web browser) to check its correctness.
 
- 24. *Show the output to the following:*
+ 26. *Show the output to the following:*
      ```bash
      $ sha1sum socket.jpg
      ```
@@ -565,24 +571,25 @@ For this final set of questions, you are welcome to refer to previous
 code/questions, set up your own experiments, and/or read the man pages for
 `recv()` (especially), `tcp`, and `udp`.
 
- 25. What happens when you call `read()` (or `recv()`) on an open socket (UDP
-     or TCP), and there are no messages are available at the socket for reading?
-     Hint: see the man page for `recv()`, especially the "DESCRIPTION" section.
-
- 26. What happens when you call `read()` (or `recv()`) on an open socket (UDP
-     or TCP), and the amount of data available is less than the requested
-     amount?  Hint: see the man page for `recv()`, especially the "DESCRIPTION"
+ 27. What happens when you call `read()` (or `recv()`) on an open socket (UDP
+     or TCP), and there are no messages are available at the socket for
+     reading?  Hint: see the man page for `read(2)`, especially the "DESCRIPTION"
      section.
 
- 27. What happens you you call `read()` (or `recv()`) on an open UDP socket,
+ 28. What happens when you call `read()` (or `recv()`) on an open socket (UDP
+     or TCP), and the amount of data available is less than the requested
+     amount?  Hint: see the man page for `read(2)`, especially the
+     "DESCRIPTION" section.
+
+ 29. What happens you you call `read()` (or `recv()`) on an open UDP socket,
      and you specify a length that is less than the length of the next
      datagram?  Hint: see the man page for `udp`, specifically within the first
-     three paragraphs of the "DESCRIPTION" section.
+     three paragraphs of the "DESCRIPTION" section.  See also questions
+     12 and 13.
 
- 28. What happens you you call `read()` (or `recv()`) on an open TCP socket,
+ 30. What happens you you call `read()` (or `recv()`) on an open TCP socket,
      and you specify a length that is less than the number of bytes available
-     for reading? Hint: see the man page for udp, specifically within the first
-     three paragraphs of the "DESCRIPTION" section.
+     for reading? Hint: see questions 22 and 23.
 
 Close down all the terminal panes in your `tmux` session to _close_ your `tmux`
 session.
