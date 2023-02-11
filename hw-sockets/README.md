@@ -562,7 +562,7 @@ program (e.g., a Web browser) to check its correctness.
      $ sha1sum socket.jpg
      ```
 
-     Hint: it should start with `c03ce59...`
+     Hint: it should start with `c03ce5...`
 
 
 ## Part 4: Review Questions
@@ -573,13 +573,13 @@ code/questions, set up your own experiments, and/or read the man pages for
 
  27. What happens when you call `read()` (or `recv()`) on an open socket (UDP
      or TCP), and there are no messages are available at the socket for
-     reading?  Hint: see the man page for `read(2)`, especially the "DESCRIPTION"
-     section.
+     reading?  Hint: see the man page for `recv()`, especially the
+     "DESCRIPTION" section.  See also the instructions in Part 1.
 
  28. What happens when you call `read()` (or `recv()`) on an open socket (UDP
-     or TCP), and the amount of data available is less than the requested
-     amount?  Hint: see the man page for `read(2)`, especially the
-     "DESCRIPTION" section.
+     or TCP), and the number of bytes available for reading is less than the
+     requested amount?  Hint: see the man page for `read(2)`, especially the
+     "RETURN VALUE" section.
 
  29. What happens you you call `read()` (or `recv()`) on an open UDP socket,
      and you specify a length that is less than the length of the next
