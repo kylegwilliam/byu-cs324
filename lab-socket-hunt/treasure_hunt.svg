@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="145.44815mm"
-   height="133.67044mm"
-   viewBox="0 0 145.44815 133.67044"
+   width="145.37131mm"
+   height="141.91501mm"
+   viewBox="0 0 145.37131 141.91501"
    version="1.1"
    id="svg896"
    sodipodi:docname="treasure_hunt.svg"
@@ -28,19 +28,19 @@
      inkscape:document-units="mm"
      showgrid="true"
      inkscape:zoom="0.914906"
-     inkscape:cx="282.54269"
-     inkscape:cy="296.20529"
+     inkscape:cx="241.00837"
+     inkscape:cy="283.08919"
      inkscape:window-width="1406"
      inkscape:window-height="830"
      inkscape:window-x="64"
-     inkscape:window-y="37"
+     inkscape:window-y="521"
      inkscape:window-maximized="0"
      inkscape:current-layer="layer1">
     <inkscape:grid
        type="xygrid"
        id="grid1017"
-       originx="34.819015"
-       originy="-53.291568" />
+       originx="34.742168"
+       originy="-53.291567" />
   </sodipodi:namedview>
   <defs
      id="defs893">
@@ -87,7 +87,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(34.819015,-53.291569)">
+     transform="translate(34.742168,-53.291569)">
     <text
        xml:space="preserve"
        style="font-size:4.93889px;line-height:1.25;font-family:sans-serif;text-align:end;text-anchor:end;stroke-width:0.264583"
@@ -235,19 +235,19 @@
     <text
        xml:space="preserve"
        style="font-size:4.93889px;line-height:1.25;font-family:sans-serif;text-align:end;text-anchor:end;stroke-width:0.264583"
-       x="44.597622"
-       y="182.79918"
+       x="47.725967"
+       y="183.6543"
        id="text5708"
-       transform="rotate(-5.2229174)"><tspan
+       transform="rotate(-5.7225965)"><tspan
          sodipodi:role="line"
          style="font-size:4.93889px;text-align:center;text-anchor:middle;stroke-width:0.264583"
-         x="44.597622"
-         y="182.79918"
-         id="tspan5702">Directions Response</tspan><tspan
+         x="47.725967"
+         y="183.6543"
+         id="tspan5702">Final Directions Response</tspan><tspan
          sodipodi:role="line"
          style="font-size:4.93889px;text-align:start;text-anchor:start;stroke-width:0.264583"
-         x="44.597622"
-         y="188.97279"
+         x="47.725967"
+         y="189.82791"
          id="tspan5706"><tspan
    style="text-align:center;text-anchor:middle"
    id="tspan5704">(variable length</tspan>)</tspan></text>
@@ -278,19 +278,61 @@
     <text
        xml:space="preserve"
        style="font-size:4.93889px;line-height:1.25;font-family:sans-serif;text-align:end;text-anchor:end;stroke-width:0.264583"
-       x="-10.241255"
-       y="100.6572"
+       x="-10.172314"
+       y="97.482361"
        id="text5756"
        transform="rotate(-0.15104314)"><tspan
          sodipodi:role="line"
          style="font-weight:normal;font-size:4.93889px;text-align:center;text-anchor:middle;stroke-width:0.264583"
-         x="-10.241256"
-         y="100.6572"
+         x="-10.172315"
+         y="97.482361"
          id="tspan5754">extract nonce;</tspan><tspan
          sodipodi:role="line"
          style="font-weight:normal;font-size:4.93889px;text-align:center;text-anchor:middle;stroke-width:0.264583"
-         x="-10.241255"
-         y="106.83082"
+         x="-10.172314"
+         y="103.65598"
+         id="tspan7418">save chunk;</tspan><tspan
+         sodipodi:role="line"
+         style="font-weight:normal;font-size:4.93889px;text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="-10.172314"
+         y="109.82958"
          id="tspan5758">update address/port</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.765;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="M 22.688002,58.639455 22.639832,191.77161"
+       id="path5896" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.765;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 104.70891,58.3508 -0.0482,124.16613"
+       id="path5908" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.93889px;line-height:1.25;font-family:sans-serif;text-align:end;text-anchor:end;stroke-width:0.264583"
+       x="-10.47146"
+       y="187.96886"
+       id="text7416"
+       transform="rotate(-0.15104314)"><tspan
+         sodipodi:role="line"
+         style="font-weight:normal;font-size:4.93889px;text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="-10.47146"
+         y="187.96886"
+         id="tspan7414" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.93889px;line-height:1.25;font-family:sans-serif;text-align:end;text-anchor:end;stroke-width:0.264583"
+       x="-2.0048218"
+       y="187.99107"
+       id="text7432"
+       transform="rotate(-0.15104314)"><tspan
+         sodipodi:role="line"
+         style="font-weight:normal;font-size:4.93889px;text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="-2.004822"
+         y="187.99107"
+         id="tspan7428">save chunk;</tspan><tspan
+         sodipodi:role="line"
+         style="font-weight:normal;font-size:4.93889px;text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="-2.0048213"
+         y="194.16469"
+         id="tspan7430">print treasure</tspan></text>
   </g>
 </svg>
