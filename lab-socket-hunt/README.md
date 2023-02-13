@@ -379,6 +379,10 @@ have.  You will want to create a loop with the appropriate termination test
 indicating that the entire treasure has been received
 (i.e., [byte 0 has a value of 0](#directions-response)).
 
+The overall interaction is illustrated in the following image:
+
+<img src="treasure_hunt.png" width="800">
+
 Once your client has collected all of the treasure chunks, it should print the
 entire treasure to standard output, followed by a newline (`\n`).  For example,
 if the treasure hunt yielded the following chunks:
