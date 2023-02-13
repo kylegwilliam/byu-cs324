@@ -556,7 +556,7 @@ be used as an argument to `bind()`, as shown.
 ### Checkpoint 2
 
 At this point, you can also test your work with
-[automated testing](#automated-testing).  Levels 0 through 2 should both work
+[automated testing](#automated-testing).  Levels 0 through 2 should all work
 at this point.
 
 Now would be a good time to save your work, if you haven't already.
@@ -602,7 +602,7 @@ following to prepare the next directions request:
 ### Checkpoint 3
 
 At this point, you can also test your work with
-[automated testing](#automated-testing).  Levels 0 through 3 should both work
+[automated testing](#automated-testing).  Levels 0 through 3 should all work
 at this point.
 
 Now would be a good time to save your work, if you haven't already.
@@ -645,7 +645,7 @@ associated with the appropriate address family, then this should "just work".
 ### Checkpoint 4
 
 At this point, you can also test your work with
-[automated testing](#automated-testing).  Levels 0 through 3 should both work
+[automated testing](#automated-testing).  Levels 0 through 4 should all work
 at this point.
 
 Now would be a good time to save your work, if you haven't already.
