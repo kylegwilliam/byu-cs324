@@ -726,9 +726,9 @@ repeat the commands from [Checkpoint 1](#checkpoint-1).  They should work as
 they did previously, but you should also see output from the print statement
 that you just added when the process finishes.
 
-`waitpid()` is the key function that you will in `sigchld_handler()`.  Read the
-man page for `waitpid()` if you haven't already, and pay special attention to
-the following:
+`waitpid()` is the key function that you will utilize in `sigchld_handler()`.
+Read the man page for `waitpid()` if you haven't already, and pay special
+attention to the following:
  - the different options for the `pid` parameter;
  - the different options for the `options` parameter (note: multiple options
    can be specified by using the bitwise-OR `|` operator); and
