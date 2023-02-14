@@ -214,13 +214,16 @@ it!).
 It is recommended that you _not_ call `connect()` on the socket but rather save
 the value of the remote address set by `getaddrinfo()` into a
 `struct sockaddr_in` (or a `struct sockaddr_in6` for IPv6) that you have
-declared.  Because the kernel implicitly assigns the local address and port to
-a given socket when none has been explicitly assigned using `bind()`, you will
-find it useful to learn the port that has been assigned using `getsockname()`
-and save it to a `struct sockaddr_in` (or `struct sockaddr_in6` for IPv6) that
-you have declared.  You will also find it useful to keep track of your address
-family and address length; although your client will always communicate over
-IPv4 _first_, that might change [later](#level-4).
+declared.  Additionally, because the kernel _implicitly_ assigns the local
+address and port to a given socket when none has been _explicitly_ assigned
+using `bind()`, you will find it useful to learn the port that has been
+assigned using `getsockname()` and save it to a `struct sockaddr_in` (or
+`struct sockaddr_in6` for IPv6) that you have declared.  Finally, you will find
+it useful to keep track of your address family and address length.  Note that
+for levels 0 through 3, your client will only use IPv4 (i.e., `AF_INET`), so
+these values will always be the same.  Nonetheless, keeping track of the
+address family and length is good practice, and you will find it useful in for
+[level 4](#level-4) when IPv6 is added.
 
 To keep track of all this, you might declare variables like the following:
 
@@ -238,6 +241,21 @@ To keep track of all this, you might declare variables like the following:
 ```
 
 See the [sockets homework assignment](../hw-sockets) for example code.
+
+A note about the `local_addr` and `remote_addr` variables.  The functions
+`sendto()`, `recvfrom()`, and `bind()` take type `struct sockaddr *`
+as an argument, rather than `struct sockaddr_in *` or `struct sockaddr_in6 *`.
+Per the `bind()` man page: "The only purpose of this structure is to cast the
+structure pointer passed in addr in order to avoid compiler warnings." In
+essence, this structure makes it so that `bind()` (and the other functions) can
+have a single definition that supports both IPv4 and IPv6.  As long as the
+`struct sockaddr *` points to valid `struct sockaddr_in` or
+`struct sockaddr_in6` instance, then the function will work properly.  You can
+think of this as C's version of polymorphism.  All that being said, if your
+client maintains a `struct sockaddr *` (e.g., `local_addr`) that points to
+whichever of `local_addr_in` or `local_addr_in6` is correct for the current
+address family being used, you can simply use `local_addr` in the calls to
+`bind()` and friends.
 
 When everything is set up, send your message using `sendto()`.  Then read the
 server's response with `recvfrom()` call.  Remember, it is just one call to
@@ -547,10 +565,12 @@ run something like this to bind the newly-created socket to a specific port:
 
 ```
 
-Note that `bind()` (like `sendto()`) takes type `struct sockaddr *` as the
-second argument, so as long as `local_addr` is pointing to the address
-structure corresponding holding to current local address and port, then it can
-be used as an argument to `bind()`, as shown.
+Note that this code prepares both `local_addr_in` and `local_addr_in6` with the
+appropriate values for receiving on a given port.  However, it's not that we're
+using both.  If `local_addr` is pointing to the one that matters at the moment,
+as has been suggested [previously](#sending-and-receiving), then only the one
+pointed to will matter.  However, there is no harm preparing both to avoid
+conditionals based on address family.
 
 
 ### Checkpoint 2
@@ -635,10 +655,10 @@ following the prepare the next directions request:
 
 Note that handling a socket that might be one of two different address families
 requires a bit of logical complexity.
-[It has been suggested](#sending-and-receiving) that you maintain two variables
-for the current local address (`local_addr_in` and `local_addr_in6`) and remote
-address (`remote_addr_in` and `remote_addr_in6`).  If you are using instances
-of `struct sockaddr_storage` to always point to the address structure
+[However, it has been suggested](#sending-and-receiving) that you maintain two
+variables for the current local address (`local_addr_in` and `local_addr_in6`)
+and remote address (`remote_addr_in` and `remote_addr_in6`).  If you are using
+instances of `struct sockaddr *` to always point to the address structure
 associated with the appropriate address family, then this should "just work".
 
 
