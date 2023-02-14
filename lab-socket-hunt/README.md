@@ -14,7 +14,7 @@ remote port assignment, IPv4 and IPv6, message parsing, and more.
    - [Level 1](#level-1)
    - [Level 2](#level-2)
    - [Level 3](#level-3)
-   - [Level 4](#level-4)
+   - [Level 4 (Extra Credit)](#level-4)
  - [Helps and Hints](#helps-and-hints)
    - [Message Formatting](#message-formatting)
    - [Error Codes](#error-codes)
@@ -223,7 +223,7 @@ it useful to keep track of your address family and address length.  Note that
 for levels 0 through 3, your client will only use IPv4 (i.e., `AF_INET`), so
 these values will always be the same.  Nonetheless, keeping track of the
 address family and length is good practice, and you will find it useful in for
-[level 4](#level-4) when IPv6 is added.
+[level 4 (extra credit)](#level-4---extra-credit) when IPv6 is added.
 
 To keep track of all this, you might declare variables like the following:
 
@@ -320,7 +320,7 @@ The following is an explanation of each field:
    correspond to a particular change that should be made with regard to how you
    contact the server.  See [Op Codes](#op-codes) for a summary, and the
    instructions for levels [1](#level-1), [2](#level-2), [3](#level-3), and
-   [4](#level-4) for a detailed description of each.
+   [4](#level-4---extra-credit) for a detailed description of each.
 
  - Bytes `n + 2` - `n + 3`: These bytes, an `unsigned short` in network byte
    order is the parameter used in conjunction with the op-code.  For op-code 0,
@@ -628,7 +628,7 @@ at this point.
 Now would be a good time to save your work, if you haven't already.
 
 
-## Level 4
+## Level 4 (Extra Credit)
 
 For level 4, responses from the server will use any of op-code 1, 2, 3, or 4,
 selected at random.  The client should be expected to do everything it did at
@@ -860,13 +860,14 @@ _all_ levels.
 Your score will be computed out of a maximum of 100 points based on the
 following distribution:
 
- - 20 points for each of 5 levels (0 through 4)
- - For each level, 4 points for each seed:
+ - 25 points for each of 4 levels (0 through 3)
+ - For each level, 5 points for each seed:
    - 7719
    - 33833
    - 20468
    - 19789
    - 59455
+ - 5 points extra credit for level 4
 
 
 # Submission
