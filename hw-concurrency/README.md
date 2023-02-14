@@ -63,8 +63,8 @@ $ nc localhost port
 used in the case where client and server are running on the same system.
 
 After all three are running, type some text in the first of the three "client"
-panes, and press enter.  Repeat with the second and third "client" panes.
-In the "analysis" pane run the following:
+panes, and press enter.  Repeat with the second and third "client" panes, _in
+that order_.  In the "analysis" pane run the following:
 
 ```bash
 $ ps -Lo user,pid,ppid,nlwp,lwp,state,ucmd -C echoserveri | grep ^username\\\|USER
@@ -94,11 +94,12 @@ line is a workaround.
  2. From the `ps` output, how many (unique) processes are running and why?
     Use the PID and LWP to identify different threads or processes.
 
- 3. From the `ps` output, how many (unique) threads are running and why?
-    Use the PID and LWP to identify different threads or processes.
+ 3. From the `ps` output, how many (unique) threads are running with each
+    proces and why?  Use the PID and LWP to identify different threads or
+    processes.
 
  4. Enter `Ctrl`+`c` on the pane in which `nc` was first executed to interrupt
-    it.  *What happens to the `nc` processes in the other windows?*
+    it.  *What happens to the `nc` processes in the other windows and why?*
 
 Stop the server by using `ctrl`+`c` in the appropriate pane.
 
@@ -182,16 +183,20 @@ spawning threads on-the-fly (`echoservert`); and threadpool-based
 (e.g., section 12.1.2).
 
 
- 19. Rank the terms in decreasing (most expensive to least expensive) order of
-     run-time cost for handling a given client.
+ 22. Which of the concurrency models has the most expensive _run-time_ cost for
+     handling a given client and why?  Consider only the cost at the time new
+     clients connect and are handled, and ignore any cost associated with
+     server start-up.
 
- 20. Which (one or more) of the three, as implemented in this assignment,
-     has/have an explicit limitation in terms of number of clients that can be
-     handled concurrently?
+ 23. Which of the concurrency models has the most expensive _start-up_ cost and
+     why?  Consider only the cost associated with server start-up, and ignore
+     any cost at the time new clients connect and are handled.
 
- 21. Which (one or more) of the three of the models allow(s) allow sharing of
+ 24. Which (one or more) of the three concurrency models, as implemented in
+     this assignment, has/have an explicit limitation in terms of number of
+     clients that can be handled concurrently and why?  Assume that system
+     resources are unlimited.
+
+ 25. Which (one or more) of the three of the models allow(s) allow sharing of
      memory and data structures without the use of inter-process communication
-     (e.g., pipes, sockets)?
-
- 22. Which (one or more) of the three of the models seems to be the least
-     complex to implement?
+     (e.g., pipes, sockets) and why?
