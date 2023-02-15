@@ -557,8 +557,7 @@ program (e.g., a Web browser) to check its correctness.
 ## Part 4: Review Questions
 
 For this final set of questions, you are welcome to refer to previous
-code/questions, set up your own experiments, and/or read the man pages for
-`recv()` (especially), `tcp`, and `udp`.
+code/questions, set up your own experiments, and/or read the man pages.
 
  27. What happens when you call `read()` (or `recv()`) on an open socket (UDP
      or TCP), and there are no messages are available at the socket for
