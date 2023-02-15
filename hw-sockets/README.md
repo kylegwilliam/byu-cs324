@@ -152,9 +152,10 @@ before.
  6. *How do the local address and port values printed out by the client
      compare to those detected by the server?*
 
-Copy the lines of code that retrieve and print the local address and port from
-the socket (i.e., starting with `getsockname()` and ending with `printf()`)
-such that they are executed again _immediately_ after the call to `sendto()`.
+In `client.c` copy the lines of code that retrieve and print the local address
+and port from the socket (i.e., starting with `getsockname()` and ending with
+`printf()`) such that they are executed again _immediately_ after the call to
+`sendto()`.
 
 Re-run `make` to rebuild both binaries.  You might get some warnings about
 variables that _might_ not have been initialized; for the purposes of this
@@ -272,11 +273,9 @@ $ cp server.c server-udp.c
 Make the following modifications:
 
  - Modify `client.c`:
-   - Make the socket use TCP (`SOCK_SREAM`) instead of UDP (`SOCK_DGRAM`).
-   - Add a 30-second `sleep()` immediately before the `for` loop in which the
-     messages are sent to the server.
-   - Uncomment the read/print code that you commented out in Part 1.
+   - Make the socket use TCP (`SOCK_STREAM`) instead of UDP (`SOCK_DGRAM`).
    - Uncomment the `connect()` code that you commented out in Part 1.
+   - Uncomment the read/print code that you commented out in Part 1.
    - Uncomment the `write()` code that you commented out in Part 1.
    - Remove the `sendto()` code that you added in Part 1 to the take the place
      of `write()`.
@@ -308,9 +307,6 @@ Make the following modifications:
        the client has closed its end of the connection and is effectively EOF.
      - break out of the inner `for` loop; we can now listen for another client.
 
-Re-run `make` to rebuild both binaries.  Interrupt and restart the server in
-the top-left "remote" pane.
-
  14. *How does the role of the original socket (i.e., `sfd`, returned from the
      call to `socket()`), after `listen()` is called on it, compare with the
      role of the socket returned from the call to `accept()`?*  See the man
@@ -322,16 +318,6 @@ the top-left "remote" pane.
      called `connect()` with a UDP socket?*  See the man pages for `connect()`,
      `tcp`, and `udp`.
 
-While the server is running on the remote host in the top-left "remote" pane,
-run the following in the top-right "local" pane:
-
-```bash
-$ ./client -4 hostname port foo bar abc123
-```
-
-(Replace `hostname` and `port` with name of the "remote" host and the port
-on which the server program is now listening, respectively.)
-
 Re-run `make` to rebuild both binaries.  Interrupt and restart the server in
 the top-left "remote" pane.
 
@@ -341,6 +327,9 @@ Now run the following command twice:
 $ ./client -4 hostname port foo bar abc123
 $ ./client -4 hostname port foo bar abc123
 ```
+
+(Replace `hostname` and `port` with name of the "remote" host and the port
+on which the server program is now listening, respectively.)
 
  16. The server prints out the _remote_ address and port associated with the
      incoming message, and the client prints out the _local_ address and port
