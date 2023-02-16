@@ -262,7 +262,7 @@ In the next steps, you will be modifying the programs, so that they communicate
 over TCP instead of UDP.  You will experiment with these TCP sockets on the
 client and server side, using the `client` and `server` programs, respectively.
 
-Before you being modifications, make a copy of the UDP version of your client
+Before you begin modifications, make a copy of the UDP version of your client
 and server programs:
 
 ```bash
@@ -482,11 +482,17 @@ Modify `client.c`:
    read, so the bytes read from the socket are placed in the buffer immediately
    following the previous bytes read.
  - After _all_ the data has been read from the socket (the remote host has
-   closed its socket), write the contents of the buffer to `stdout`.  Because
-   the data you have read will not necessarily be a string (i.e.,
-   null-terminated), you should not use `printf()`. Alternatives are `fwrite()`
-   or `write()`.  Similarly, if you want to perform _any_ string operations,
-   then you will need to add the null byte yourself.
+   closed its socket), write the contents of the buffer to standard output.
+   The data received on the socket will not necessarily be a string--i.e.,
+   printable characters followed by a null-terminator.  It might be an image, a
+   movie, an executable, or something else. Therefore, you should not use
+   `printf()` or any other string operators unless you _know_ it is a string
+   (see the [Strings, I/O, and Environment](../hw-strings-io-env#printf-and-friends)
+   assignment).  Alternatives are `write()` and `fwrite()`.
+
+   Even in the case where you _know_ bytes read from the socket are printable
+   characters, if you want to perform any string operations, then you will need
+   to add the null byte explicitly yourself.
 
 Now, execute your client program such that:
  - you are sending data to the standard HTTP port (80) at
