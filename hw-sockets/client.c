@@ -137,7 +137,7 @@ int main(int argc, char *argv[]) {
 
 		/* if connect is successful, then break out of the loop; we
 		 * will use the current address */
-		if (connect(sfd, rp->ai_addr, rp->ai_addrlen) != -1)
+		if (connect(sfd, remote_addr, addr_len) != -1)
 			break;  /* Success */
 
 		close(sfd);
