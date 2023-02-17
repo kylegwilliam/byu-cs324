@@ -25,6 +25,9 @@ programs specified in those commands.
   - [Checkpoint 3](#checkpoint-3-1)
   - [`do_bgfg()`](#do_bgfg)
   - [Final Checkpoint](#final-checkpoint)
+- [Helper Functions](#helper-functions)
+  - [`parseline()`](#parseline)
+  - [Job Handling Functions](#job-handling-functions)
 - [Debugging Helps](#debugging-helps)
 - [Automated Testing](#automated-testing)
 - [Evaluation](#evaluation)
@@ -547,71 +550,6 @@ foreground job is stopped or interrupted, not the shell.
 You will implement these handlers.
 
 
-### Helper Functions
-
-Several functions have been written to help you parse the command line.
-
-
-#### `parseline()`
-
-`parseline()` finds all the words (i.e., non-whitespace characters separated by
-whitespace) on the command line and puts them into an array of strings which
-is passed in as an argument: `char **argv` (i.e., an array of `char *`).  It
-returns true if the last word on the command line is the background operator,
-`&`; false otherwise.  Thus, you can use the return value to determine whether
-or not the job should start out in the background or foreground, respectively.
-
-For example, suppose the following command line is provided to your shell:
-
-```bash
-$ /bin/cat test.txt
-```
-
-After calling `parseline()`, `argv` contains the following:
-
-```c
-argv[0] = "/bin/cat";
-argv[1] = "test.txt";
-argv[2] = NULL;
-```
-
-(A `NULL` value at index 2 indicates that that there are no more words, so your
-code can detect that programmatically.)
-
-In this case, `parseline()` will return `0` (false).  However, if the command
-line had been the following:
-
-```bash
-$ /bin/cat test.txt &
-```
-
-Then `argv` would still contain the following after calling `parseline()`:
-
-```c
-argv[0] = "/bin/cat";
-argv[1] = "test.txt";
-argv[2] = NULL;
-```
-
-But `parseline()` would return `1` (true).
-
-
-#### Job Handling Functions
-
-The following functions are used for manipulating the global array of job
-structures (`struct job_t`), `jobs`:
-
- - `clearjob()` - clears the entries in a job struct
- - `maxjid()` - returns the largest allocated job ID
- - `addjob()` - adds a job to the job list
- - `deletejob()` - deletes a job with PID=pid from the job list
- - `fgpid()` - returns the PID of current foreground job, 0 if no such job
- - `getjobpid()` - finds a job (by PID) in the job list
- - `getjobjid()` - finds a job (by JID) in the job list
- - `pid2jid()` - maps a process ID to a job ID
- - `listjobs()` - prints the job list
-
-
 # Instructions
 
 _This is where you start coding!_
@@ -644,8 +582,9 @@ Test the first string in the array.  If it matches one of the following, then
 follow the corresponding instructions, and return 1.
 
  - `quit` - call `exit(0)`
- - `fg` or `bg` - call `do_bgfg()`, passing in the list of arguments from the
-   command line (i.e., those parsed with `parseline()`).
+ - `fg` or `bg` - call `do_bgfg()`, passing in `argv`, which is list of
+   arguments parsed from the command-line input
+   with [`parseline()`](#parseline)).
  - `jobs` - call `listjobs()`
 
 If the first string in the array does not match any of these, then return 0--an
@@ -659,8 +598,10 @@ indicator that the command passed in was _not_ a built-in command.
  - `char *cmdline` - a string containing the contents of a command line read in
    from standard input in the read/eval loop.
 
-Parse the command line using `parseline()`.  Call `builtin_cmd()` to see if the
-command line corresponds to a built-in command.  Otherwise, do the following:
+Call the `parseline()` helper function,
+[which has been implemented for you](#helper-functions).  Call `builtin_cmd()`
+to see if the command line corresponds to a built-in command.  Otherwise, do
+the following:
  - Block `SIGCHLD`, `SIGINT`, and `SIGTSTP` signals.
  - Fork a child process.
  - In the child process:
@@ -899,6 +840,71 @@ sequences from all previous checkpoints should still work as well.
 
 You can also test your work with [automated testing](#automated-testing).
 Tests 1 - 16 should work at this point.
+
+
+# Helper Functions
+
+Several functions have been written to help you parse the command line.
+
+
+## `parseline()`
+
+`parseline()` finds all the words (i.e., non-whitespace characters separated by
+whitespace) on the command line and puts them into an array of strings which
+is passed in as an argument: `char **argv` (i.e., an array of `char *`).  It
+returns true if the last word on the command line is the background operator,
+`&`; false otherwise.  Thus, you can use the return value to determine whether
+or not the job should start out in the background or foreground, respectively.
+
+For example, suppose the following command line is provided to your shell:
+
+```bash
+$ /bin/cat test.txt
+```
+
+After calling `parseline()`, `argv` contains the following:
+
+```c
+argv[0] = "/bin/cat";
+argv[1] = "test.txt";
+argv[2] = NULL;
+```
+
+(A `NULL` value at index 2 indicates that that there are no more words, so your
+code can detect that programmatically.)
+
+In this case, `parseline()` will return `0` (false).  However, if the command
+line had been the following:
+
+```bash
+$ /bin/cat test.txt &
+```
+
+Then `argv` would still contain the following after calling `parseline()`:
+
+```c
+argv[0] = "/bin/cat";
+argv[1] = "test.txt";
+argv[2] = NULL;
+```
+
+But `parseline()` would return `1` (true).
+
+
+## Job Handling Functions
+
+The following functions are used for manipulating the global array of job
+structures (`struct job_t`), `jobs`:
+
+ - `clearjob()` - clears the entries in a job struct
+ - `maxjid()` - returns the largest allocated job ID
+ - `addjob()` - adds a job to the job list
+ - `deletejob()` - deletes a job with PID=pid from the job list
+ - `fgpid()` - returns the PID of current foreground job, 0 if no such job
+ - `getjobpid()` - finds a job (by PID) in the job list
+ - `getjobjid()` - finds a job (by JID) in the job list
+ - `pid2jid()` - maps a process ID to a job ID
+ - `listjobs()` - prints the job list
 
 
 # Debugging Hints
