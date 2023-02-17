@@ -741,7 +741,7 @@ following distribution:
  - 5 - compiles without any warnings (this applies to your proxy code, not
    `tiny` and friends).
 
-Run the following to check your implementation:
+Run the following to check your implementation on one of the CS lab machines:
 
 ```b
 $ ./driver.py -b 50 -c 45 threadpool
@@ -750,11 +750,4 @@ $ ./driver.py -b 50 -c 45 threadpool
 
 # Submission
 
-Run the following command to `tar` your file(s):
-
-```bash
-$ make handin
-```
-
-This creates a `.tar` file in the parent directory.  Upload this file to
-the assignment page on LearningSuite.
+Upload `proxy.c` to the assignment page on LearningSuite.
