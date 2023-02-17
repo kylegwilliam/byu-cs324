@@ -39,10 +39,13 @@ void sig_handler5(int signum) {
 	if (foo == 0) {
 		exit(7);
 	}
+	//sigchild lets it know its changed state
 }
 
 void sig_handler6(int signum) {
 	int pid, status;
+	// wait for children check man page
+	// wnohang if no children if no children print error number. 
 	pid = waitpid(-1, &status, WNOHANG);
 	if (pid < 0) {
 		printf("%d\n", errno); fflush(stdout);
@@ -50,6 +53,8 @@ void sig_handler6(int signum) {
 }
 
 void sig_handler7(int signum) {
+	// if signal is blocked and it recieved a signal it waits. unblock the signal it is sent and recieved.
+	// only one is recieved if there is a bunch loaded up. 
 	if (block) {
 		block = 0;
 	} else {
@@ -63,12 +68,17 @@ void sig_handler8(int signum) {
 	sigact.sa_flags = SA_RESTART;
 	sigact.sa_handler = SIG_DFL;
 	sigaction(SIGTERM, &sigact, NULL);
+
+	// set sigterm back to defalt.
+	// then i need to run it.
+
 }
 
 void sig_handler9(int signum) {
 	int status;
 	waitpid(-1, &status, 0);
 	printf("%d\n", WEXITSTATUS(status)); fflush(stdout);
+	// Wait on any child, when reaped print exit staus of that child. 
 }
 
 void install_sig_handlers() {
