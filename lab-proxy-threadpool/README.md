@@ -68,23 +68,26 @@ your concurrency approach to use a threadpool.
 ## Reading
 
 Read the following in preparation for this assignment:
+
   - Sections 11.1 - 11.6, 12.1, and 12.3 - 12.5 in the book
-  - The man pages for the following:
-    - `tcp`
-    - `socket`
-    - `socket()`
-    - `send()`
-    - `recv()`
-    - `bind()`
-    - `connect()`
-    - `getaddrinfo()`
-    - `pthread_create()`
-    - `pthread_detach()`
-    - `pthread_self()`
-    - `sem_init()`
-    - `sem_post()`
-    - `sem_wait()`
-    - `sem_overview()` (unnamed semaphores)
+Additionally, man pages for the following are referenced throughout the
+assignment:
+
+ - `tcp`
+ - `socket`
+ - `socket()`
+ - `send()`
+ - `recv()`
+ - `bind()`
+ - `connect()`
+ - `getaddrinfo()`
+ - `pthread_create()`
+ - `pthread_detach()`
+ - `pthread_self()`
+ - `sem_init()`
+ - `sem_post()`
+ - `sem_wait()`
+ - `sem_overview()` (unnamed semaphores)
 
 
 # Instructions
@@ -384,6 +387,7 @@ $ curl -x http://localhost:port/ "http://www-notls.imaal.byu.edu/cgi-bin/slowsen
 $ ./slow-client.py -x http://localhost:port/ -b 1 "http://www-notls.imaal.byu.edu:5599/cgi-bin/slowsend.cgi?obj=lyrics"
 $ ./slow-client.py -x http://localhost:port/ -b 1 "http://www-notls.imaal.byu.edu/cgi-bin/slowsend.cgi?obj=lyrics"
 ```
+
 (Replace `port` with the port on which your proxy server is listening.)
 
 
