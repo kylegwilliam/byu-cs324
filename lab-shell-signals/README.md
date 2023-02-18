@@ -423,7 +423,7 @@ input forever--unless and until one of two things happens:
    `ctrl`+`d`.  When EOF is detected, the shell also calls `exit(0)`,
    terminating the process.
 Try either one of these to make the shell exit and to return to the shell from
-which you called `./tinyref`.
+which you called `./tshref`.
 
 
 ### Checkpoint 3
