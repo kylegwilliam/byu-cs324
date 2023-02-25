@@ -140,7 +140,7 @@ on the socket used by the client.  Modify `client.c` in the following ways:
  - Replace the call to `write()` with a call to `sendto()`.  The new line of
    code will look nearly identical to the one you just commented out, except
    that `sendto()` allows you to specify the recipient (remote IP address and
-   host), which is necessary if `connect()` has not been called on the socket.
+   port), which is necessary if `connect()` has not been called on the socket.
 
 Re-run `make` to rebuild both binaries.  Interrupt and restart the server in
 the top-left "remote" pane.
