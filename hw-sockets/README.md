@@ -168,7 +168,7 @@ before.
 
 In `client.c` copy the lines of code that retrieve and print the local address
 and port from the socket (i.e., starting with `getsockname()` and ending with
-`printf()`) such that they are executed again _immediately_ after the call to
+`fprintf()`) such that they are executed again _immediately_ after the call to
 `sendto()`.
 
 Re-run `make` to rebuild both binaries.  You might get some warnings about
@@ -180,7 +180,7 @@ With the server running on the remote host, execute (again) the client command
 you ran previously in the right "local" pane, sending the same strings as
 before.
 
- 7. Analyze the output associated with the `printf()` statements that follow
+ 7. Analyze the output associated with the `fprintf()` statements that follow
     the calls to `getsockname()`.  *What do the differences in output teach
     you about _when_ the local address and port are set for a given socket?*
 
@@ -216,7 +216,7 @@ to both client and server code to better understand what is going on:
      `recvfrom()` statement.
  - Modify `client.c`:
    - Remove the lines following `sendto()`, beginning with `getsockname()` and
-     ending with `printf()`, which you added previously.
+     ending with `fprintf()`, which you added previously.
    - Comment out the code that calls `read()` and `printf()`, such that it does
      not attempt to read from the socket or print what it read after writing
      to the socket.
