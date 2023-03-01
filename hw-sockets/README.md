@@ -557,7 +557,7 @@ program such that:
    www-notls.imaal.byu.edu;
  - you are redirecting the contents of `http-socket.txt` to the standard input
    of the client process (using input redirection on the shell);
- - you are redirecting the standard output of your client process to
+ - you are piping the standard output of your client process to
    `./strip_http.py`; and
  - you are redirecting the standard output of `./strip_http.py` to `socket.jpg`.
 
