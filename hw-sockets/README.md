@@ -234,8 +234,8 @@ With the server running on the remote host, execute (again) the client command
 you ran previously in the right "local" pane, sending the same strings as
 before.
 
- 8. *How many _total_ calls to `send()` / `write()` were made by the client?*
-    Hint: refer to `client.c`.
+ 8. *How many _total_ calls to `send()` / `sendto()` / `write()` were made by
+    the client?* Hint: refer to `client.c`.
  9. *How many messages were received by the kernel of the server-side process
     _before_ the server called `recvfrom()` the second time (i.e., _between_
     the server's first and second calls to `recvfrom()`)?*  You can assume that
