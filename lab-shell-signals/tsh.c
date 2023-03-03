@@ -66,7 +66,7 @@ void sigtstp_handler(int sig);
 void sigint_handler(int sig);
 
 /* Here are helper routines that we've provided for you */
-int parseline(const char *cmdline, char **argv); 
+int (const char *cmdline, char **argv); 
 int parseargs(char **argv, int *cmds, int *stdin_redir, int *stdout_redir);
 void sigquit_handler(int sig);
 
@@ -120,7 +120,7 @@ int main(int argc, char **argv)
     /* Install the signal handlers */
 
     /* These are the ones you will need to implement */
-    Signal(SIGINT,  sigint_handler);   /* ctrl-c */
+    //Signal(SIGINT,  sigint_handler);   /* ctrl-c */
     Signal(SIGTSTP, sigtstp_handler);  /* ctrl-z */
     Signal(SIGCHLD, sigchld_handler);  /* Terminated or stopped child */
 
@@ -167,6 +167,7 @@ int main(int argc, char **argv)
 */
 void eval(char *cmdline) 
 {
+    printf("You entered: %s\n", cmdline);
     return;
 }
 
@@ -294,7 +295,24 @@ int parseline(const char *cmdline, char **argv)
  */
 int builtin_cmd(char **argv) 
 {
-    return 0;     /* not a builtin command */
+
+    if (strcmp(argv[0], "quit")) {
+        exit(0);
+        return(1);
+    }
+
+    elif (strcmp(argv[0], "fg") || strcmp(argv[0], "bf")) {
+        //Not sure about this one
+        do_bgfg(parseline(argv[0], argv));
+        return(1);
+    }
+
+    elif (strcmp(argv[0], "jobs")) {
+        listjobs();
+        return(1);
+    }
+
+    return 0;
 }
 
 /* 
