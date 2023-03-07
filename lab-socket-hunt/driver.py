@@ -2,9 +2,13 @@
 
 import argparse
 import hashlib
+import random
 import re
+import socket
 import subprocess
+import struct
 import sys
+import threading
 import time
 
 NUM_LEVELS = 5
@@ -31,6 +35,35 @@ SUMS = ['127624217659f4ba97d5457391edc8f60758714b',
 
 RECV_RE = re.compile('^recv(from)?.* = (\d+)$')
 
+level_seed_result = (None, None)
+
+def tmp_server(port):
+    global level_seed_result
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.settimeout(1)
+    s.bind(('127.0.0.1', port))
+
+    try:
+        (buf, addr) = s.recvfrom(65536)
+    except socket.timeout:
+        return
+    if len(buf) == 8:
+        level, userid, seed = struct.unpack('!HIH', buf[:8])
+        level_seed_result = (level, seed)
+
+def test_level_seed(level, seed):
+    global level_seed_result
+    port = random.randint(1024, 65535)
+    level_seed_result = (None, None)
+    t = threading.Thread(target=tmp_server, args=(port,))
+    t.start()
+    cmd = [CLIENT, '127.0.0.1', str(port), str(level), str(seed)]
+    p = subprocess.Popen(cmd, stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL)
+    t.join()
+    p.kill()
+    return level_seed_result == (level, seed)
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('server', action='store', type=str)
@@ -52,6 +85,11 @@ def main():
             max_score += 4
             sys.stdout.write(f'    Seed %5d:' % (seed))
             sys.stdout.flush()
+
+            if not test_level_seed(level, seed):
+                sys.stdout.write(f' FAILED\n')
+                continue
+
             cmd = ['strace', '-e', 'trace=%network',
                     CLIENT, args.server, str(args.port), str(level), str(seed)]
             p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
