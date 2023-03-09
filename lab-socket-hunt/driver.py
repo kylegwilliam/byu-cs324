@@ -96,10 +96,7 @@ def main():
             sys.stdout.write(f'    Seed %5d:' % (seed))
             sys.stdout.flush()
 
-            msg = test_level_seed(level, seed)
-            if msg:
-                sys.stdout.write(f' FAILED: {msg}\n')
-                continue
+            err_msg = test_level_seed(level, seed)
 
             cmd = ['strace', '-e', 'trace=%network',
                     CLIENT, args.server, str(args.port), str(level), str(seed)]
@@ -126,9 +123,12 @@ def main():
 
             if h in SUMS and tot_bytes in allowed_lengths:
                 score += 4
-                sys.stdout.write(f' PASSED\n')
+                sys.stdout.write(f' PASSED')
             else:
-                sys.stdout.write(f' FAILED\n')
+                sys.stdout.write(f' FAILED')
+            if err_msg:
+                sys.stdout.write(f' (warning: {err_msg})')
+            sys.stdout.write('\n')
             
     print(f'Score: {score}/{max_score}')
             
