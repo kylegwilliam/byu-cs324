@@ -35,7 +35,7 @@ SUMS = ['127624217659f4ba97d5457391edc8f60758714b',
 
 RECV_RE = re.compile('^recv(from)?.* = (\d+)$')
 
-level_seed_result = (None, None)
+level_seed_result = (False, False, None, None)
 
 def tmp_server(port):
     global level_seed_result
@@ -47,9 +47,11 @@ def tmp_server(port):
         (buf, addr) = s.recvfrom(65536)
     except socket.timeout:
         return
-    if len(buf) == 8:
-        level, userid, seed = struct.unpack('!HIH', buf[:8])
-        level_seed_result = (level, seed)
+    if len(buf) != 8:
+        level_seed_result = (True, False, None, None)
+        return
+    level, userid, seed = struct.unpack('!HIH', buf[:8])
+    level_seed_result = (True, True, level, seed)
 
 def test_level_seed(level, seed):
     global level_seed_result
@@ -62,7 +64,15 @@ def test_level_seed(level, seed):
             stderr=subprocess.DEVNULL)
     t.join()
     p.kill()
-    return level_seed_result == (level, seed)
+    if not level_seed_result[0]:
+        return 'Port provided on command line is not used by client'
+    if not level_seed_result[1]:
+        return 'Initial message length invalid'
+    if level_seed_result[2] != level:
+        return 'Level provided on command line is not sent by client'
+    if level_seed_result[3] != seed:
+        return 'Seed provided on command line is not sent by client'
+    return ''
 
 def main():
     parser = argparse.ArgumentParser()
@@ -86,8 +96,9 @@ def main():
             sys.stdout.write(f'    Seed %5d:' % (seed))
             sys.stdout.flush()
 
-            if not test_level_seed(level, seed):
-                sys.stdout.write(f' FAILED\n')
+            msg = test_level_seed(level, seed)
+            if msg:
+                sys.stdout.write(f' FAILED: {msg}\n')
                 continue
 
             cmd = ['strace', '-e', 'trace=%network',
