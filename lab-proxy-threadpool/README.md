@@ -501,7 +501,7 @@ Now that you have some experience with multi-threaded server, change your proxy
 server to use a pool of threads to handle concurrent HTTP requests instead of
 launching a new thread for each request.
 
-When the program starts, initialize eight producer threads, a shared buffer
+When the program starts, initialize eight consumer threads, a shared buffer
 (queue) with five slots, and the associated semaphores and other shared data
 structures to prepare the producer and consumers for handling concurrent
 requests.  Formulate your producer loop, so that every time a new client
