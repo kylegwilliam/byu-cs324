@@ -147,8 +147,9 @@ For the purposes of this lab, you can use the following simplified rules:
      the first space comprise the _request method_.
    - All characters between the first space and the second space
      (non-inclusive) comprise the _URL_.
-   - All characters after the first end-of-line sequence `\r\n` comprise
-     the _headers_.  You do not need to further parse the headers.
+   - All characters after the first line (i.e., after the first `\r\n`
+     sequence) comprise the _headers_.  You do not need to further parse the
+     headers.
  - For the URL extracted from the HTTP request:
    - If there is a colon `:` in the URL _after_ the `://`, then:
      - the digits immediately following the colon comprise the _port_;
