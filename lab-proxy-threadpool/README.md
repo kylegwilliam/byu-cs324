@@ -225,7 +225,7 @@ Write functions for each of the following:
    `accept()`, handle a client HTTP request.  For now, just have this method do
    the following:
    - Read from the socket into a buffer until the entire HTTP request has been
-     received (again, there are no request headers in this lab, so this is
+     received (again, there is no request body in this lab, so this is
      basically just end of headers).  Use the `parse_request()` function for this.
    - Print out the values from the HTTP request, once you have received it in
      its entirety (e.g., like `test_parser()` does).
