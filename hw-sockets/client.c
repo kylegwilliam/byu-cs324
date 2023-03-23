@@ -59,6 +59,8 @@ int main(int argc, char *argv[]) {
 
 	/* Obtain address(es) matching host/port */
 
+	//START HERE FOR TREASURE_HUNTER
+
 	memset(&hints, 0, sizeof(struct addrinfo));
 	hints.ai_family = af;    /* Allow IPv4, IPv6, or both, depending on
 				    what was specified on the command line. */
@@ -137,7 +139,9 @@ int main(int argc, char *argv[]) {
 
 		/* if connect is successful, then break out of the loop; we
 		 * will use the current address */
-		if (connect(sfd, remote_addr, addr_len) != -1)
+
+		// uncomment later
+		//if (connect(sfd, remote_addr, addr_len) != -1)
 			break;  /* Success */
 
 		close(sfd);
@@ -177,6 +181,9 @@ int main(int argc, char *argv[]) {
 			local_addr_str, local_port, addr_fam,
 			addr_len);
 
+	//SECTION B IS WHAT I NEED / no loop for socket call. no connect and one call 
+	// on the socket, no loop
+
 	/* SECTION C - interact with server; send, receive, print messages */
 
 	/* Send remaining command-line arguments as separate
@@ -191,8 +198,9 @@ int main(int argc, char *argv[]) {
 					"Ignoring long message in argument %d\n", j);
 			continue;
 		}
-
-		if (write(sfd, argv[j], len) != len) {
+		// uncomment later
+		//if (write(sfd, argv[j], len) != len) {
+		if (sendto(sfd, argv[j], len, flags, NULL, 0) != len) {
 			fprintf(stderr, "partial/failed write\n");
 			exit(EXIT_FAILURE);
 		}

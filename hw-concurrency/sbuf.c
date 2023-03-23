@@ -26,11 +26,17 @@ void sbuf_deinit(sbuf_t *sp)
 /* $begin sbuf_insert */
 void sbuf_insert(sbuf_t *sp, int item)
 {
+    printf("before accept()\n"); fflush(stdout);
     sem_wait(&sp->slots);                          /* Wait for available slot */
+    printf("after accept()\n"); fflush(stdout); 
+
     sem_wait(&sp->mutex);                          /* Lock the buffer */
     sp->buf[(++sp->rear)%(sp->n)] = item;   /* Insert the item */
     sem_post(&sp->mutex);                          /* Unlock the buffer */
+
+    printf("before accept()\n"); fflush(stdout);
     sem_post(&sp->items);                          /* Announce available item */
+    printf("after accept()\n"); fflush(stdout); 
 }
 /* $end sbuf_insert */
 
@@ -42,8 +48,13 @@ int sbuf_remove(sbuf_t *sp)
     sem_wait(&sp->items);                          /* Wait for available item */
     sem_wait(&sp->mutex);                          /* Lock the buffer */
     item = sp->buf[(++sp->front)%(sp->n)];  /* Remove the item */
+    printf("before accept()\n"); fflush(stdout);
     sem_post(&sp->mutex);                          /* Unlock the buffer */
+    printf("after accept()\n"); fflush(stdout); 
+
+    printf("before accept()\n"); fflush(stdout);
     sem_post(&sp->slots);                          /* Announce available slot */
+    printf("after accept()\n"); fflush(stdout); 
     return item;
 }
 /* $end sbuf_remove */
